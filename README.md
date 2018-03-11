@@ -1,13 +1,13 @@
 # Mobile Application Review Classifier (MARC) 3.0
 
 
-MARC 2.0 is the second release of our [Mobile Application Review Classifier MARC](https://github.com/seelprojects/MARC). MARC 3.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
+MARC 3.0 is the second release of our [Mobile Application Review Classifier MARC](https://github.com/seelprojects/MARC). MARC 3.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
 
 ![ScreenShot](https://github.com/seelprojects/MARC-3.0/blob/master/MARC%202.0/MARC.PNG)
 
 # Summarization
 
-MARC 2.0 provides multiple data summarization algorithms that can be used to generate concise and comprehensive summaries of user reviews. These algorithms include Hybrid TF, Hybrid TFIDF, SumBasic, and LexRank.
+MARC 3.0 provides multiple data summarization algorithms that can be used to generate concise and comprehensive summaries of user reviews. These algorithms include Hybrid TF, Hybrid TFIDF, SumBasic, and LexRank.
 
 # Resources
 1- [Weka: Data Mining Software in Java](http://www.cs.waikato.ac.nz/ml/weka/)
@@ -20,13 +20,13 @@ MARC 2.0 provides multiple data summarization algorithms that can be used to gen
 
 # Installation
 
-MARC requires .Net 4.5.2 and Java 1.8 to run. MARC can be installed by running the installer from the directory: [MARC Installer -> Debug -> MARC 2.0 Installer.msi](https://github.com/seelprojects/MARC-2.0/blob/master/MARC%202.0%20Installer/Debug/)
+MARC requires .Net 4.5.2 and Java 1.8 to run. MARC can be installed by running the installer from the directory: [MARC Installer -> Debug -> MARC 3.0 Installer.msi](https://github.com/seelprojects/MARC-3.0/blob/master/MARC%202.0%20Installer/Debug/)
 
-MARC provides default training datasets (BOF Dataset.arff and BOW Dataset.arff) in the local app data installation directory (C:\Users\{Username}\AppData\Roaming\MARC 2.0\InputData). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
+MARC provides default training datasets (BOF Dataset.arff and BOW Dataset.arff) in the local app data installation directory (C:\Users\{Username}\AppData\Roaming\MARC 3.0\InputData). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
 
 # Modification
 
-In order to open and modify the C# source project you will need [Visual Studio 2015, FreeCommunity Edition](https://www.visualstudio.com/vs/community/) .Net 4.5.2. Once you have loaded the project open MARC 2.0.sln in src directory in Visual Studio and select MARC as the startup project. You may also have to link references from the project directory.
+In order to open and modify the C# source project you will need [Visual Studio 2015, FreeCommunity Edition](https://www.visualstudio.com/vs/community/) .Net 4.5.2. Once you have loaded the project open MARC 3.0.sln in src directory in Visual Studio and select MARC as the startup project. You may also have to link references from the project directory.
 
 # License
 
