@@ -32,7 +32,8 @@ namespace MARC2
     {
 
         ImportPage importPage;
-        ClassifyPage classifyPage;
+        ClassifyFRPage classifyFRPage;
+        ClassifyNFRPage classifyNFRPage;
 
         SummarizePage summarizePage;
         private Brush themeColor = (Brush)(new BrushConverter().ConvertFrom("#607D8B"));
@@ -69,6 +70,7 @@ namespace MARC2
             summarizePageCard.Background = Brushes.White;
             aboutPageCard.Background = Brushes.White;
             settingsPageCard.Background = Brushes.White;
+            nfrPageCard.Background = Brushes.White;
             this.Title = "Mobile Application Review Classifier : Home";
             exportButtonLabel.Content = "  Save Imported Reviews";
 
@@ -77,6 +79,7 @@ namespace MARC2
             summarizeLabel.Foreground = Brushes.Black;
             aboutLabel.Foreground = Brushes.Black;
             settingsLabel.Foreground = Brushes.Black;
+            nfrLabel.Foreground = Brushes.Black;
 
             ChartImportReviews.Visibility = Visibility.Visible;
             ChartClassifyReviews.Visibility = Visibility.Collapsed;
@@ -92,13 +95,14 @@ namespace MARC2
         {
             if (Model.ReviewList != null && Model.ReviewList.Count > 0)
             {
-                classifyPage = new ClassifyPage(Model);
-                LeftContent.Content = classifyPage;
+                classifyFRPage = new ClassifyFRPage(Model);
+                LeftContent.Content = classifyFRPage;
                 classifyPageCard.Background = themeColor;
                 importPageCard.Background = Brushes.White;
                 summarizePageCard.Background = Brushes.White;
                 aboutPageCard.Background = Brushes.White;
                 settingsPageCard.Background = Brushes.White;
+                nfrPageCard.Background = Brushes.White;
 
                 this.Title = "Mobile Application Review Classifier : Classify";
                 exportButtonLabel.Content = " Save Classification Results";
@@ -107,6 +111,7 @@ namespace MARC2
                 summarizeLabel.Foreground = Brushes.Black;
                 aboutLabel.Foreground = Brushes.Black;
                 settingsLabel.Foreground = Brushes.Black;
+                nfrLabel.Foreground = Brushes.Black;
 
                 ChartImportReviews.Visibility = Visibility.Collapsed;
                 ChartClassifyReviews.Visibility = Visibility.Visible;
@@ -136,6 +141,7 @@ namespace MARC2
                 summarizePageCard.Background = themeColor;
                 aboutPageCard.Background = Brushes.White;
                 settingsPageCard.Background = Brushes.White;
+                nfrPageCard.Background = Brushes.White;
 
 
                 ChartImportReviews.Visibility = Visibility.Collapsed;
@@ -149,6 +155,7 @@ namespace MARC2
                 summarizeLabel.Foreground = Brushes.White;
                 aboutLabel.Foreground = Brushes.Black;
                 settingsLabel.Foreground = Brushes.Black;
+                nfrLabel.Foreground = Brushes.Black;
             }
             else
             {
@@ -171,12 +178,14 @@ namespace MARC2
             summarizePageCard.Background = Brushes.White;
             aboutPageCard.Background = themeColor;
             settingsPageCard.Background = Brushes.White;
+            nfrPageCard.Background = Brushes.White;
 
             this.Title = "Mobile Application Review Classifier : About";
             homeLabel.Foreground = Brushes.Black;
             classifyLabel.Foreground = Brushes.Black;
             summarizeLabel.Foreground = Brushes.Black;
             settingsLabel.Foreground = Brushes.Black;
+            nfrLabel.Foreground = Brushes.Black;
             aboutLabel.Foreground = Brushes.White;
             ChartImportReviews.Visibility = Visibility.Collapsed;
             ChartClassifyReviews.Visibility = Visibility.Collapsed;
@@ -185,6 +194,45 @@ namespace MARC2
 
             NewAboutPage newAboutPage = new NewAboutPage();
             LeftContent.Content = newAboutPage;
+        }
+
+        /// <summary>
+        /// NFR Page Click Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nfrPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Model.ReviewList != null && Model.ReviewList.Count > 0)
+            {
+                classifyNFRPage = new ClassifyNFRPage(Model);
+                LeftContent.Content = classifyNFRPage;
+                classifyPageCard.Background = Brushes.White;
+                importPageCard.Background = Brushes.White;
+                summarizePageCard.Background = Brushes.White;
+                aboutPageCard.Background = Brushes.White;
+                settingsPageCard.Background = Brushes.White;
+                nfrPageCard.Background = themeColor;
+
+                this.Title = "Mobile Application Review Classifier : NFRs";
+                homeLabel.Foreground = Brushes.Black;
+                classifyLabel.Foreground = Brushes.Black;
+                summarizeLabel.Foreground = Brushes.Black;
+                settingsLabel.Foreground = Brushes.Black;
+                nfrLabel.Foreground = Brushes.White;
+                aboutLabel.Foreground = Brushes.Black;
+                ChartImportReviews.Visibility = Visibility.Collapsed;
+                ChartClassifyReviews.Visibility = Visibility.Collapsed;
+                exportButton.Visibility = Visibility.Collapsed;
+
+
+            }
+            else
+            {
+                MessageBox.Show("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+
         }
 
         /// <summary>
@@ -211,9 +259,11 @@ namespace MARC2
             EditStopwordsWindow editStopwordsWindowDialog = new EditStopwordsWindow(this.Model);
             if (editStopwordsWindowDialog.ShowDialog() == true)
             {
-                
+
             }
         }
+
+
 
         /// <summary>
         /// 
@@ -275,11 +325,11 @@ namespace MARC2
             }
         }
 
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <param name="outputFolder"></param>
-       /// <param name="fileName"></param>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outputFolder"></param>
+        /// <param name="fileName"></param>
         private void ExportSummarizationResults(string outputFolder, string fileName)
         {
             //Write Bug Reports to OutputFolder
@@ -358,13 +408,13 @@ namespace MARC2
             switch (action)
             {
                 case Actions.Import:
-                    dlg.Title = "MARC 2.0 : Select Directory To Save Imported Results";
+                    dlg.Title = "MARC 3.0 : Select Directory To Save Imported Results";
                     break;
                 case Actions.Classify:
-                    dlg.Title = "MARC 2.0 : Select Directory To Save Classification Results";
+                    dlg.Title = "MARC 3.0 : Select Directory To Save Classification Results";
                     break;
                 case Actions.Summarize:
-                    dlg.Title = "MARC 2.0 : Select Directory To Save Summarization Results";
+                    dlg.Title = "MARC 3.0 : Select Directory To Save Summarization Results";
                     break;
                 default:
                     break;
@@ -487,12 +537,12 @@ namespace MARC2
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while writing output. You may not have permission to write on the selected folder. If problem persists contact the author.");
             }
         }
 
-        
+
     }
 }

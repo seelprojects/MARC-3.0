@@ -30,7 +30,7 @@ namespace MARC2
     /// <summary>
     /// Interaction logic for Classify.xaml
     /// </summary>
-    public partial class ClassifyFRPage : Page
+    public partial class ClassifyNFRPage : Page
     {
         public MyViewModel Model { get; set; }
         public bool changeInProgress = false;
@@ -43,8 +43,8 @@ namespace MARC2
         List<string> filteredReviews;
         TextFilterType txtfilterType = TextFilterType.NoFilter;
 
-        bool BOFCheckboxCheckedState;
-        bool BOWCheckboxCheckedState;
+        bool CITCheckboxCheckedState;
+        bool DITCheckboxCheckedState;
         bool NoSWCheckboxCheckedState;
         bool STCheckboxCheckedState;
 
@@ -58,7 +58,7 @@ namespace MARC2
         /// Classify Page accepts model with MyViewModel type 
         /// </summary>
         /// <param name="model"></param>
-        public ClassifyFRPage(MyViewModel model)
+        public ClassifyNFRPage(MyViewModel model)
         {
             InitializeComponent();
 
@@ -69,7 +69,7 @@ namespace MARC2
             //Initialize Checkbox checked state
             NBCheckbox.IsChecked = true;
             DTCheckbox.IsChecked = true;
-            BOWCheckbox.IsChecked = true;
+            DITCheckbox.IsChecked = true;
             
             bugReportsHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Bug Reports");
             userRequirementsHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "User Requirements");
@@ -154,8 +154,8 @@ namespace MARC2
             if (!changeInProgress)
             {
                 changeInProgress = true;
-                BOFCheckbox.IsChecked = false;
-                BOWCheckbox.IsChecked = false;
+                DITCheckbox.IsChecked = false;
+                CITCheckbox.IsChecked = false;
                 (sender as CheckBox).IsChecked = true;
                 changeInProgress = false;
             }
@@ -216,8 +216,8 @@ namespace MARC2
             progressBarContainer.Visibility = Visibility.Visible;
 
             var userReviews = Model.ReviewList;
-            BOFCheckboxCheckedState = BOFCheckbox.IsChecked ?? false;
-            BOWCheckboxCheckedState = BOWCheckbox.IsChecked ?? false;
+            CITCheckboxCheckedState = CITCheckbox.IsChecked ?? false;
+            DITCheckboxCheckedState = DITCheckbox.IsChecked ?? false;
             NoSWCheckboxCheckedState = NoSWCheckbox.IsChecked ?? false;
             STCheckboxCheckedState = STCheckbox.IsChecked ?? false;
 
@@ -310,7 +310,7 @@ namespace MARC2
             WekaClassifier.WekaClassifier classifier;
             allClassification = new List<string>();
 
-            if (BOFCheckboxCheckedState)
+            if (CITCheckboxCheckedState)
             {
                 //Server Test
                 FrameNetOnline.FrameNetOnline frameNetServerTest = new FrameNetOnline.FrameNetOnline("This is a test.");
@@ -345,7 +345,7 @@ namespace MARC2
                     MessageBox.Show("Looks like the server is down");
                 }
             }
-            else if (BOWCheckboxCheckedState)
+            else if (DITCheckboxCheckedState)
             {
                 filteredReviews = new List<string>();
                 foreach (string review in userReviews)
@@ -629,6 +629,17 @@ namespace MARC2
         private void instScroll2_Loaded(object sender, RoutedEventArgs e)
         {
             userRequirementListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
+        }
+
+
+        /// <summary>
+        /// Browse Custom Indicator Terms List Folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void browseCITFileButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
