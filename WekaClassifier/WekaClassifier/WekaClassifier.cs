@@ -62,8 +62,6 @@ namespace WekaClassifier
                     default:
                         break;
                 }
-
-
             }
             else
             {
@@ -76,19 +74,14 @@ namespace WekaClassifier
                     case ClassifierName.NaiveBayes:
                         FilteredNaiveBayes("BOW", trainingFilePath, directoryName, textFilterType);
                         break;
-                    case ClassifierName.RandomForest:
-                        break;
                     default:
                         break;
                 }
             }
         }
 
-        
-        private void BinarySVM(string trainingFilePath, string directoryName, TextFilterType textFilterType)
-        {
-            throw new NotImplementedException();
-        }
+
+
 
         private void ConstructBinaryBOWArffFile(List<string> inputBoWList, string directoryName)
         {
@@ -221,6 +214,12 @@ namespace WekaClassifier
 
         #region Binary Naive Bayes
 
+        /// <summary>
+        /// Binary Classification for NFR extraction using Naive Bayes
+        /// </summary>
+        /// <param name="trainingFilePath"></param>
+        /// <param name="directoryName"></param>
+        /// <param name="textFilterType"></param>
         private void BinaryNaiveBayes(string trainingFilePath, string directoryName, TextFilterType textFilterType)
         {
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
@@ -375,7 +374,7 @@ namespace WekaClassifier
         }
 
         /// <summary>
-        /// Check if Naive Bayes model for stopword removal with stemming already exists
+        /// Check if Binary Naive Bayes model for stopword removal with stemming already exists
         /// </summary>
         /// <returns></returns>
         private bool BinaryNBSWRSTCheckifModelExists(string trainingDatatsetFilePath)
@@ -405,7 +404,7 @@ namespace WekaClassifier
         }
 
         /// <summary>
-        /// Check if Naive Bayes model for stemming already exists
+        /// Check if Binary Naive Bayes model for stemming already exists
         /// </summary>
         /// <returns></returns>
         private bool BinaryNBSTCheckifModelExists(string trainingDatatsetFilePath)
@@ -434,7 +433,7 @@ namespace WekaClassifier
         }
 
         /// <summary>
-        /// Check if Naive Bayes model for stopwords removal already exists
+        /// Check if Binary Naive Bayes model for stopwords removal already exists
         /// </summary>
         /// <returns></returns>
         private bool BinaryNBSWRCheckifModelExists(string trainingDatatsetFilePath)
@@ -463,7 +462,7 @@ namespace WekaClassifier
         }
 
         /// <summary>
-        /// Check if Naive Bayes model for no filter already exists
+        /// Check if Binary Naive Bayes model for no filter already exists
         /// </summary>
         /// <returns></returns>
         private bool BinaryNBNoFilterCheckifModelExists(string trainingDatatsetFilePath)
@@ -493,6 +492,292 @@ namespace WekaClassifier
 
         #endregion Binary Naive Bayes
 
+        #region Binary SVM
+
+        /// <summary>
+        /// Binary Classification for NFR extraction using SVM
+        /// </summary>
+        /// <param name="trainingFilePath"></param>
+        /// <param name="directoryName"></param>
+        /// <param name="textFilterType"></param>
+        private void BinarySVM(string trainingFilePath, string directoryName, TextFilterType textFilterType)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            try
+            {
+                var trainingDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Binary NFR Training.arff"; ;
+                var testDatasetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Binary NFR Test.arff";
+
+                //User Supplied Custom Training File
+                if (trainingFilePath != null)
+                {
+                    trainingDatatsetFilePath = trainingFilePath;
+                }
+
+                java.io.BufferedReader trainReader = new BufferedReader(new FileReader(trainingDatatsetFilePath));//File with text examples
+                BufferedReader classifyReader = new BufferedReader(new FileReader(testDatasetFilePath));//File with text to classify
+
+                Instances trainInsts = new Instances(trainReader);
+                Instances classifyInsts = new Instances(classifyReader);
+
+                trainInsts.setClassIndex(trainInsts.numAttributes() - 1);
+                classifyInsts.setClassIndex(classifyInsts.numAttributes() - 1);
+
+                FilteredClassifier model = new FilteredClassifier();
+
+                StringToWordVector stringtowordvector = new StringToWordVector();
+                stringtowordvector.setTFTransform(true);
+                model.setFilter(new StringToWordVector());
+
+                weka.classifiers.Classifier smocls = new weka.classifiers.functions.SMO();
+
+                //smocls.setOptions(weka.core.Utils.splitOptions("-C 1.0 -L 0.001 -P 1.0E-12 -N 0 -V -1 -W 1 -K \"weka.classifiers.functions.supportVector.Puk -C 250007 -O 1.0 -S 1.0\""));
+                smocls.setOptions(weka.core.Utils.splitOptions("-C 1.0 -L 0.0010 -P 1.0E-12 -N 0 -V -1 -W 1 -K \"weka.classifiers.functions.supportVector.PolyKernel -C 250007 -E 1.0\""));
+                model.setClassifier(smocls);
+
+                bool exists;
+                var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+                directoryRoot = specificFolder;
+                //Check if the model exists and if not then build a model
+                switch (textFilterType)
+                {
+                    case TextFilterType.NoFilter:
+                        exists = BinarySVMNoFilterCheckifModelExists(trainingDatatsetFilePath);
+
+                        //if does not exists then build model and save it and save the file also for current filter
+                        if (!exists)
+                        {
+                            model.buildClassifier(trainInsts);
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\SVM\BinarySVMNoFilterModel.dat", model);
+                            string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
+                            using (var sW = new StreamWriter(directoryRoot + @"\Model\SVM\\BinarySVMNoFilterFile.dat"))
+                            {
+                                sW.Write(content);
+                            }
+                        }
+                        // if exists then read the file and use the model
+                        else
+                        {
+                            model = Helper.Helper.ReadFromBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\SVM\BinarySVMNoFilterModel.dat");
+                        }
+
+                        break;
+
+                    //Case Stopwords Removal
+                    case TextFilterType.StopwordsRemoval:
+                        exists = BinarySVMSWRCheckifModelExists(trainingDatatsetFilePath);
+                        //if does not exists then build model and save it and save the file also for current filter
+                        if (!exists)
+                        {
+                            model.buildClassifier(trainInsts);
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\SVM\BinarySVMSWRFilterModel.dat", model);
+                            string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
+                            using (var sW = new StreamWriter(directoryRoot + @"\Model\SVM\\BinarySVMSWRFile.dat"))
+                            {
+                                sW.Write(content);
+                            }
+                        }
+                        // if exists then read the file and use the model
+                        else
+                        {
+                            model = Helper.Helper.ReadFromBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\SVM\BinarySVMSWRFilterModel.dat");
+                        }
+
+                        break;
+
+                    //Case Stemming
+                    case TextFilterType.Stemming:
+                        exists = BinarySVMSTCheckifModelExists(trainingDatatsetFilePath);
+                        //if does not exists then build model and save it and save the file also for current filter
+                        if (!exists)
+                        {
+                            model.buildClassifier(trainInsts);
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\SVM\BinarySVMSTFilterModel.dat", model);
+                            string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
+                            using (var sW = new StreamWriter(directoryRoot + @"\Model\SVM\\BinarySVMSTFile.dat"))
+                            {
+                                sW.Write(content);
+                            }
+                        }
+                        // if exists then read the file and use the model
+                        else
+                        {
+                            model = Helper.Helper.ReadFromBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\SVM\BinarySVMSTFilterModel.dat");
+                        }
+                        break;
+
+                    //Case Stopwords Removal with Stemming
+                    case TextFilterType.StopwordsRemovalStemming:
+                        exists = BinarySVMSWRSTCheckifModelExists(trainingDatatsetFilePath);
+                        //if does not exists then build model and save it and save the file also for current filter
+                        if (!exists)
+                        {
+                            model.buildClassifier(trainInsts);
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\SVM\BinarySVMSWRSTFilterModel.dat", model);
+                            string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
+                            using (var sW = new StreamWriter(directoryRoot + @"\Model\SVM\\BinarySVMSWRSTFile.dat"))
+                            {
+                                sW.Write(content);
+                            }
+                        }
+                        // if exists then read the file and use the model
+                        else
+                        {
+                            model = Helper.Helper.ReadFromBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\SVM\BinarySVMSWRSTFilterModel.dat");
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                //model.buildClassifier(trainInsts);
+                for (int i = 0; i < classifyInsts.numInstances(); i++)
+                {
+                    classifyInsts.instance(i).setClassMissing();
+                    double cls = model.classifyInstance(classifyInsts.instance(i));
+                    classifyInsts.instance(i).setClassValue(cls);
+                    classification = cls == 0 ? "NFR"
+                                    : "Mis";
+                    tempAllClassification.Add(classification);
+                }
+                AllClassification = tempAllClassification;
+            }
+            catch (Exception o)
+            {
+                error = o.ToString();
+            }
+        }
+
+
+        /// <summary>
+        /// Check if Binary SVM model for Stopwords Removal Stemming Exists
+        /// </summary>
+        /// <returns></returns>
+        private bool BinarySVMSWRSTCheckifModelExists(string trainingDatatsetFilePath)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
+            var folder = directoryRoot + @"\Model\SVM";
+            if (System.IO.File.Exists(folder + @"\BinarySVMSWRSTFilterModel.dat") && System.IO.File.Exists(folder + @"\BinarySVMSWRSTFile.dat"))
+            {
+                var isEqual = System.IO.File.ReadLines(folder + @"\BinarySVMSWRSTFile.dat").SequenceEqual(System.IO.File.ReadLines(trainingDatatsetFilePath));
+                return isEqual;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Check if Binary SVM model for Stemming Exists
+        /// </summary>
+        /// <returns></returns>
+        private bool BinarySVMSTCheckifModelExists(string trainingDatatsetFilePath)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
+            var folder = directoryRoot + @"\Model\SVM";
+            if (System.IO.File.Exists(folder + @"\BinarySVMSTFilterModel.dat") && System.IO.File.Exists(folder + @"\BinarySVMSTFile.dat"))
+            {
+                var isEqual = System.IO.File.ReadLines(folder + @"\BinarySVMSTFile.dat").SequenceEqual(System.IO.File.ReadLines(trainingDatatsetFilePath));
+                return isEqual;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Check if Binary SVM model for Stopwords Removal Exists
+        /// </summary>
+        /// <returns></returns>
+        private bool BinarySVMSWRCheckifModelExists(string trainingDatatsetFilePath)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
+            var folder = directoryRoot + @"\Model\SVM";
+            if (System.IO.File.Exists(folder + @"\BinarySVMSWRFilterModel.dat") && System.IO.File.Exists(folder + @"\BinarySVMSWRFile.dat"))
+            {
+                var isEqual = System.IO.File.ReadLines(folder + @"\BinarySVMSWRFile.dat").SequenceEqual(System.IO.File.ReadLines(trainingDatatsetFilePath));
+                return isEqual;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Check if Binary SVM model for no Filter exists
+        /// </summary>
+        /// <returns></returns>
+        private bool BinarySVMNoFilterCheckifModelExists(string trainingDatatsetFilePath)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
+            var folder = directoryRoot + @"\Model\SVM";
+            if (System.IO.File.Exists(folder + @"\BinarySVMNoFilterModel.dat") && System.IO.File.Exists(folder + @"\BinarySVMNoFilterFile.dat"))
+            {
+                var isEqual = System.IO.File.ReadLines(folder + @"\BinarySVMNoFilterFile.dat").SequenceEqual(System.IO.File.ReadLines(trainingDatatsetFilePath));
+                return isEqual;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion Binary SVM
 
         #region Multi Class Naive Bayes
 
