@@ -82,7 +82,8 @@ namespace MARC2
             nfrLabel.Foreground = Brushes.Black;
 
             ChartImportReviews.Visibility = Visibility.Visible;
-            ChartClassifyReviews.Visibility = Visibility.Collapsed;
+            ChartFRClassifyReviews.Visibility = Visibility.Collapsed;
+            ChartNFRClassifyReviews.Visibility = Visibility.Collapsed;
             exportButton.Visibility = Visibility.Visible;
         }
 
@@ -114,7 +115,8 @@ namespace MARC2
                 nfrLabel.Foreground = Brushes.Black;
 
                 ChartImportReviews.Visibility = Visibility.Collapsed;
-                ChartClassifyReviews.Visibility = Visibility.Visible;
+                ChartFRClassifyReviews.Visibility = Visibility.Visible;
+                ChartNFRClassifyReviews.Visibility = Visibility.Collapsed;
                 exportButton.Visibility = Visibility.Visible;
 
             }
@@ -145,7 +147,8 @@ namespace MARC2
 
 
                 ChartImportReviews.Visibility = Visibility.Collapsed;
-                ChartClassifyReviews.Visibility = Visibility.Collapsed;
+                ChartFRClassifyReviews.Visibility = Visibility.Collapsed;
+                ChartNFRClassifyReviews.Visibility = Visibility.Collapsed;
                 exportButton.Visibility = Visibility.Visible;
 
                 this.Title = "Mobile Application Review Classifier : Summarize";
@@ -188,7 +191,8 @@ namespace MARC2
             nfrLabel.Foreground = Brushes.Black;
             aboutLabel.Foreground = Brushes.White;
             ChartImportReviews.Visibility = Visibility.Collapsed;
-            ChartClassifyReviews.Visibility = Visibility.Collapsed;
+            ChartFRClassifyReviews.Visibility = Visibility.Collapsed;
+            ChartNFRClassifyReviews.Visibility = Visibility.Collapsed;
             exportButton.Visibility = Visibility.Collapsed;
 
 
@@ -222,7 +226,8 @@ namespace MARC2
                 nfrLabel.Foreground = Brushes.White;
                 aboutLabel.Foreground = Brushes.Black;
                 ChartImportReviews.Visibility = Visibility.Collapsed;
-                ChartClassifyReviews.Visibility = Visibility.Collapsed;
+                ChartFRClassifyReviews.Visibility = Visibility.Collapsed;
+                ChartNFRClassifyReviews.Visibility = Visibility.Visible;
                 exportButton.Visibility = Visibility.Collapsed;
 
 
@@ -276,14 +281,23 @@ namespace MARC2
             {
                 ExportImportedReviews();
             }
-            else if (ChartClassifyReviews.Visibility == Visibility.Visible)
+            else if (ChartFRClassifyReviews.Visibility == Visibility.Visible)
             {
-                ExportClassificationResultsReview();
+                ExportFRClassificationResultsReview();
+            }
+            else if (ChartNFRClassifyReviews.Visibility == Visibility.Visible)
+            {
+                ExportNFRClassificationResultsReview();
             }
             else
             {
                 ExportSummarizationResultsReview();
             }
+        }
+
+        private void ExportNFRClassificationResultsReview()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -360,7 +374,7 @@ namespace MARC2
         /// <summary>
         /// 
         /// </summary>
-        private void ExportClassificationResultsReview()
+        private void ExportFRClassificationResultsReview()
         {
             if (Model.BugReportList == null || Model.BugReportList.Count == 0 && Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
             {

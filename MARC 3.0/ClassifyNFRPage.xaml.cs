@@ -87,62 +87,90 @@ namespace MARC2
         {
             List<ReviewItem> items = new List<ReviewItem>();
 
-            //if (Model.BugReportList != null)
-            //{
-            //    foreach (var item in Model.BugReportList)
-            //    {
-            //        items.Add(new ReviewItem() { Review = item });
-            //    }
-            //    bugReportListbox.ItemsSource = items;
-            //    noBugReportTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            //}
+            if (Model.DependabilityList != null)
+            {
+                foreach (var item in Model.DependabilityList)
+                {
+                    items.Add(new ReviewItem() { Review = item });
+                }
+                dependabilityListbox.ItemsSource = items;
+                noDependabilityTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
 
-            //items = new List<ReviewItem>();
-            //if (Model.UserRequirementList != null)
-            //{
-            //    foreach (var item in Model.UserRequirementList)
-            //    {
-            //        items.Add(new ReviewItem() { Review = item });
-            //    }
-            //    userRequirementListbox.ItemsSource = items;
-            //    noUserRequirementTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            //}
+            items = new List<ReviewItem>();
+            if (Model.PerformanceList != null)
+            {
+                foreach (var item in Model.PerformanceList)
+                {
+                    items.Add(new ReviewItem() { Review = item });
+                }
+                performanceListbox.ItemsSource = items;
+                noPerformanceTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
 
-            ////Update Pie Chart for Bug Reports, User Requirements and Miscellaneous
+            items = new List<ReviewItem>();
+            if (Model.SupportabilityList != null)
+            {
+                foreach (var item in Model.SupportabilityList)
+                {
+                    items.Add(new ReviewItem() { Review = item });
+                }
+                supportabilityListbox.ItemsSource = items;
+                noSupportabilityTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
 
-            //try
-            //{
-            //    if (Model.ClassfyReviewsResultsCollection != null && Model.ClassfyReviewsResultsCollection.Count > 0)
-            //        Model.ClassfyReviewsResultsCollection.Clear();
+            items = new List<ReviewItem>();
+            if (Model.UsabilityList != null)
+            {
+                foreach (var item in Model.UsabilityList)
+                {
+                    items.Add(new ReviewItem() { Review = item });
+                }
+                usabilityListbox.ItemsSource = items;
+                noUsabilityTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
 
-            //    Model.ClassfyReviewsResultsCollection.Add(
-            //        new PieSeries
-            //        {
-            //            Title = "Bug Reports",
-            //            Values = new ChartValues<ObservableValue> { new ObservableValue(Model.BugReportList != null ? Model.BugReportList.Count : 0) },
-            //            DataLabels = true
-            //        });
-            //    Model.ClassfyReviewsResultsCollection.Add(
-            //        new PieSeries
-            //        {
-            //            Title = "User Requirements",
-            //            Values = new ChartValues<ObservableValue> { new ObservableValue(Model.UserRequirementList != null ? Model.UserRequirementList.Count : 0) },
-            //            DataLabels = true
-            //        });
-            //    Model.ClassfyReviewsResultsCollection.Add(
-            //        new PieSeries
-            //        {
-            //            Title = "Miscellaneous",
-            //            Values = new ChartValues<ObservableValue> { new ObservableValue(Model.MiscellaneousList != null ? Model.MiscellaneousList.Count : 0) },
-            //            DataLabels = true
-            //        });
+            //Update Pie Chart for Dependability, Performance, Supportability and Usability
+            try
+            {
+                if (Model.ClassfyNFRReviewsResultsCollection != null && Model.ClassfyNFRReviewsResultsCollection.Count > 0)
+                    Model.ClassfyNFRReviewsResultsCollection.Clear();
+
+                Model.ClassfyNFRReviewsResultsCollection.Add(
+                    new PieSeries
+                    {
+                        Title = "Dependability",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.DependabilityList != null ? Model.DependabilityList.Count : 0) },
+                        DataLabels = true
+                    });
+                Model.ClassfyNFRReviewsResultsCollection.Add(
+                    new PieSeries
+                    {
+                        Title = "Performance",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.PerformanceList != null ? Model.PerformanceList.Count : 0) },
+                        DataLabels = true
+                    });
+                Model.ClassfyNFRReviewsResultsCollection.Add(
+                    new PieSeries
+                    {
+                        Title = "Supportability",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.SupportabilityList != null ? Model.SupportabilityList.Count : 0) },
+                        DataLabels = true
+                    });
+                Model.ClassfyNFRReviewsResultsCollection.Add(
+                   new PieSeries
+                   {
+                       Title = "Usability",
+                       Values = new ChartValues<ObservableValue> { new ObservableValue(Model.UsabilityList != null ? Model.UsabilityList.Count : 0) },
+                       DataLabels = true
+                   });
 
 
-            //    progressBarContainer.Visibility = Visibility.Hidden;
-            //}
-            //catch (Exception ex)
-            //{
-            //}
+                progressBarContainer.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         /// <summary>

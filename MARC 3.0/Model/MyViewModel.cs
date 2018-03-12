@@ -16,7 +16,8 @@ namespace MARC2.Model
     {
 
         public SeriesCollection ImportedReviewsCollection { get; set; }
-        public SeriesCollection ClassfyReviewsResultsCollection { get; set; }
+        public SeriesCollection ClassfyFRReviewsResultsCollection { get; set; }
+        public SeriesCollection ClassfyNFRReviewsResultsCollection { get; set; }
 
 
         /// <summary>
@@ -40,8 +41,8 @@ namespace MARC2.Model
                 
             };
 
-            //Initialize Classify Page Pie Chart
-            ClassfyReviewsResultsCollection = new SeriesCollection
+            //Initialize FR Classify Page Pie Chart
+            ClassfyFRReviewsResultsCollection = new SeriesCollection
             {
                 new PieSeries
                 {
@@ -62,6 +63,38 @@ namespace MARC2.Model
                     DataLabels = true
                 }
             };
+
+
+            //Initialize NFR Classify Page Pie Chart
+            ClassfyNFRReviewsResultsCollection = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "Dependability",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                    DataLabels = true
+                },
+                 new PieSeries
+                {
+                    Title = "Performance",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                    DataLabels = true
+                },
+                  new PieSeries
+                {
+                    Title = "Supportability",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                    DataLabels = true
+                },
+                  new PieSeries
+                {
+                    Title = "Usability",
+                    Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                    DataLabels = true
+                }
+            };
+
+
 
         }
 

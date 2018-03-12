@@ -109,24 +109,24 @@ namespace MARC2
 
             try
             {
-                if (Model.ClassfyReviewsResultsCollection != null && Model.ClassfyReviewsResultsCollection.Count > 0)
-                    Model.ClassfyReviewsResultsCollection.Clear();
+                if (Model.ClassfyFRReviewsResultsCollection != null && Model.ClassfyFRReviewsResultsCollection.Count > 0)
+                    Model.ClassfyFRReviewsResultsCollection.Clear();
 
-                Model.ClassfyReviewsResultsCollection.Add(
+                Model.ClassfyFRReviewsResultsCollection.Add(
                     new PieSeries
                     {
                         Title = "Bug Reports",
                         Values = new ChartValues<ObservableValue> { new ObservableValue(Model.BugReportList != null ? Model.BugReportList.Count : 0) },
                         DataLabels = true
                     });
-                Model.ClassfyReviewsResultsCollection.Add(
+                Model.ClassfyFRReviewsResultsCollection.Add(
                     new PieSeries
                     {
                         Title = "User Requirements",
                         Values = new ChartValues<ObservableValue> { new ObservableValue(Model.UserRequirementList != null ? Model.UserRequirementList.Count : 0) },
                         DataLabels = true
                     });
-                Model.ClassfyReviewsResultsCollection.Add(
+                Model.ClassfyFRReviewsResultsCollection.Add(
                     new PieSeries
                     {
                         Title = "Miscellaneous",
