@@ -302,7 +302,7 @@ namespace MARC2
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -334,7 +334,7 @@ namespace MARC2
             var currDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -559,7 +559,7 @@ namespace MARC2
         private string ShowSelectOutputFolderDialog()
         {
             var dlg = new CommonOpenFileDialog();
-            dlg.Title = "MARC 2.0 : Select Directory To Save Classification Results";
+            dlg.Title = "MARC 3.0 : Select Directory To Save Classification Results";
             dlg.IsFolderPicker = true;
             dlg.InitialDirectory = Directory.GetCurrentDirectory();
 
@@ -723,7 +723,7 @@ namespace MARC2
                 var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
                 // Combine the base folder with your specific folder....
-                string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+                string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
                 // Check if folder exists and if not, create it
                 if (!Directory.Exists(specificFolder))

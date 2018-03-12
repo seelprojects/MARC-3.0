@@ -70,7 +70,7 @@ namespace MARC2
             NBCheckbox.IsChecked = true;
             DTCheckbox.IsChecked = true;
             DITCheckbox.IsChecked = true;
-            
+
             dependabilityHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Dependability");
             performanceHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Performance");
             supportabilityHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Supportability");
@@ -229,7 +229,7 @@ namespace MARC2
                 changeInProgress = true;
                 NBCheckbox.IsChecked = false;
                 SVMCheckbox.IsChecked = false;
-                
+
                 (sender as CheckBox).IsChecked = true;
                 changeInProgress = false;
             }
@@ -334,67 +334,28 @@ namespace MARC2
         private void classifyAllReviews(List<string> userReviews, string trainingFilePath, ClassifierName classifierName)
         {
             ResolveTextFilterType();
-
-
             WekaClassifier.WekaClassifier classifier;
             allClassification = new List<string>();
 
-            if (CITCheckboxCheckedState)
+            filteredReviews = new List<string>();
+            foreach (string review in userReviews)
             {
-                //Server Test
-                FrameNetOnline.FrameNetOnline frameNetServerTest = new FrameNetOnline.FrameNetOnline("This is a test.");
+                filteredReviews.Add(FilterText(review));
+            }
 
-                //if server test passes (returns more than 0 frames) then proceed with frame extraction.
-                if (frameNetServerTest.output.Count != 0)
+            try
+            {
+                classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType, ClassificationScheme.Binary);
+                foreach (string data in classifier.AllClassification)
                 {
-                    listOfReviewsBoF = new List<List<string>>();
-                    currentReviewIndex = 0;
-                    foreach (string review in userReviews)
-                    {
-                        currentReviewIndex++;
-                        FrameNetOnline.FrameNetOnline abc = new FrameNetOnline.FrameNetOnline(review);
-                        listOfReviewsBoF.Add(abc.output);
-                    }
-                    try
-                    {
-                        classifier = new WekaClassifier.WekaClassifier(listOfReviewsBoF, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType);
-
-                        foreach (string data in classifier.AllClassification)
-                        {
-                            allClassification.Add(data);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        exceptionMessage = e.ToString();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Looks like the server is down");
+                    allClassification.Add(data);
                 }
             }
-            else if (DITCheckboxCheckedState)
+            catch (Exception e)
             {
-                filteredReviews = new List<string>();
-                foreach (string review in userReviews)
-                {
-                    filteredReviews.Add(FilterText(review));
-                }
-
-                try
-                {
-                    classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType);
-                    foreach (string data in classifier.AllClassification)
-                    {
-                        allClassification.Add(data);
-                    }
-                }
-                catch (Exception e)
-                {
-                    exceptionMessage = e.ToString();
-                }
+                exceptionMessage = e.ToString();
             }
+
         }
 
         /// <summary>
@@ -431,7 +392,7 @@ namespace MARC2
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -547,7 +508,7 @@ namespace MARC2
         private string ShowSelectOutputFolderDialog()
         {
             var dlg = new CommonOpenFileDialog();
-            dlg.Title = "MARC 2.0 : Select Directory To Save Classification Results";
+            dlg.Title = "MARC 3.0 : Select Directory To Save Classification Results";
             dlg.IsFolderPicker = true;
             dlg.InitialDirectory = Directory.GetCurrentDirectory();
 
@@ -726,6 +687,6 @@ namespace MARC2
 
         #endregion Mouse Scroll Handlers
 
-       
+
     }
 }

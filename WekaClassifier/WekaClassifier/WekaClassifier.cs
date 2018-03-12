@@ -21,7 +21,7 @@ using WekaClassifier.Helper;
 
 namespace WekaClassifier
 {
-    
+
 
     /// <summary>
     /// Weka Classifier
@@ -38,25 +38,86 @@ namespace WekaClassifier
 
         public List<string> AllClassification { get; set; }
 
+
+
+
+
         /// <summary>
         /// This is the constructor for BOW single review classification. Overloaded Method
         /// </summary>
         /// <param name="singleReviewBOW"></param>
-        public WekaClassifier(List<string> inputBoWList, string trainingFilePath, string directoryName, ClassifierName classificationName, TextFilterType textFilterType)
+        public WekaClassifier(List<string> inputBoWList, string trainingFilePath, string directoryName, ClassifierName classifierName, TextFilterType textFilterType, ClassificationScheme classificationScheme = ClassificationScheme.MultiClass)
         {
-            ConstructBOWArffFile(inputBoWList, directoryName);
-            switch (classificationName)
+            if (classificationScheme == ClassificationScheme.Binary)
             {
-                case ClassifierName.SupportVectorMachine:
-                    FilteredSVM("BOW", trainingFilePath, directoryName, textFilterType);
-                    break;
-                case ClassifierName.NaiveBayes:
-                    FilteredNaiveBayes("BOW", trainingFilePath, directoryName,textFilterType);
-                    break;
-                case ClassifierName.RandomForest:
-                    break;
-                default:
-                    break;
+                ConstructBinaryBOWArffFile(inputBoWList, directoryName);
+                switch (classifierName)
+                {
+                    case ClassifierName.SupportVectorMachine:
+                        BinarySVM(trainingFilePath, directoryName, textFilterType);
+                        break;
+                    case ClassifierName.NaiveBayes:
+                        BinaryNaiveBayes(trainingFilePath, directoryName, textFilterType);
+                        break;
+                    default:
+                        break;
+                }
+
+
+            }
+            else
+            {
+                ConstructBOWArffFile(inputBoWList, directoryName);
+                switch (classifierName)
+                {
+                    case ClassifierName.SupportVectorMachine:
+                        FilteredSVM("BOW", trainingFilePath, directoryName, textFilterType);
+                        break;
+                    case ClassifierName.NaiveBayes:
+                        FilteredNaiveBayes("BOW", trainingFilePath, directoryName, textFilterType);
+                        break;
+                    case ClassifierName.RandomForest:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        
+        private void BinarySVM(string trainingFilePath, string directoryName, TextFilterType textFilterType)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ConstructBinaryBOWArffFile(List<string> inputBoWList, string directoryName)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+
+            var testDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Binary NFR Test.arff";
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(testDatatsetFilePath))
+            {
+                file.WriteLine("@relation Test");
+                file.WriteLine();
+                file.WriteLine("@attribute text string");
+                file.WriteLine("@attribute @@class@@ {NFR,Mis}");
+                file.WriteLine();
+                file.WriteLine("@data");
+
+                foreach (string line in inputBoWList)
+                {
+                    file.WriteLine("'" + line + " " + "',?");
+                }
+                file.Close();
             }
         }
 
@@ -64,16 +125,16 @@ namespace WekaClassifier
         /// This is the constructor for BOF  user reviews. Overloaded Method
         /// </summary>
         /// <param name="inputFramesList"></param>
-        public WekaClassifier(List<List<string>> inputBoFList, string trainingFilePath, string directoryName, ClassifierName classificationName, TextFilterType textFilterType)
+        public WekaClassifier(List<List<string>> inputBoFList, string trainingFilePath, string directoryName, ClassifierName classifierName, TextFilterType textFilterType)
         {
             ConstructFramesArffFile(inputBoFList, directoryName);
-            switch (classificationName)
+            switch (classifierName)
             {
                 case ClassifierName.SupportVectorMachine:
-                    FilteredSVM("BOF", trainingFilePath, directoryName,textFilterType);
+                    FilteredSVM("BOF", trainingFilePath, directoryName, textFilterType);
                     break;
                 case ClassifierName.NaiveBayes:
-                    FilteredNaiveBayes("BOF", trainingFilePath, directoryName,textFilterType);
+                    FilteredNaiveBayes("BOF", trainingFilePath, directoryName, textFilterType);
                     break;
                 case ClassifierName.RandomForest:
                     break;
@@ -91,7 +152,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -114,7 +175,7 @@ namespace WekaClassifier
                     file.WriteLine("'" + line + " " + "',?");
                 }
                 file.Close();
-            }    
+            }
         }
 
         /// <summary>
@@ -127,7 +188,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -157,6 +218,284 @@ namespace WekaClassifier
             }
         }
 
+
+        #region Binary Naive Bayes
+
+        private void BinaryNaiveBayes(string trainingFilePath, string directoryName, TextFilterType textFilterType)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            try
+            {
+                var trainingDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Binary NFR Training.arff"; ;
+                var testDatasetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Binary NFR Test.arff";
+
+                //User Supplied Custom Training File
+                if (trainingFilePath != null)
+                {
+                    trainingDatatsetFilePath = trainingFilePath;
+                }
+
+                java.io.BufferedReader trainReader = new BufferedReader(new FileReader(trainingDatatsetFilePath)); //File with text examples
+                BufferedReader classifyReader = new BufferedReader(new FileReader(testDatasetFilePath)); //File with text to classify
+
+                Instances trainInsts = new Instances(trainReader);
+                Instances classifyInsts = new Instances(classifyReader);
+
+                trainInsts.setClassIndex(trainInsts.numAttributes() - 1);
+
+                classifyInsts.setClassIndex(classifyInsts.numAttributes() - 1);
+
+                FilteredClassifier model = new FilteredClassifier();
+
+                StringToWordVector stringtowordvector = new StringToWordVector();
+                stringtowordvector.setTFTransform(true);
+                model.setFilter(new StringToWordVector());
+                model.setClassifier(new NaiveBayes());
+
+                bool exists;
+                var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+
+                //Pointig to appdata folder
+                directoryRoot = specificFolder;
+                //Check if the model exists and if not then build a model
+                switch (textFilterType)
+                {
+                    //Case No Filter
+                    case TextFilterType.NoFilter:
+                        exists = BinaryNBNoFilterCheckifModelExists(trainingDatatsetFilePath);
+                        //if does not exists then build model and save it and save the file also for current filter
+                        if (!exists)
+                        {
+                            model.buildClassifier(trainInsts);
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\BinaryNBNoFilterModel.dat", model);
+
+                            string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
+                            using (var sW = new StreamWriter(directoryRoot + @"\Model\NB\\BinaryNBNoFilterFile.dat"))
+                            {
+                                sW.Write(content);
+                            }
+                        }
+                        // if exists then read the file and use the model
+                        else
+                        {
+                            model = Helper.Helper.ReadFromBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\BinaryNBNoFilterModel.dat");
+                        }
+                        break;
+
+
+                    //Case Stopwords Removal
+                    case TextFilterType.StopwordsRemoval:
+                        exists = BinaryNBSWRCheckifModelExists(trainingDatatsetFilePath);
+                        //if does not exists then build model and save it and save the file also for current filter
+                        if (!exists)
+                        {
+                            model.buildClassifier(trainInsts);
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\BinaryNBSWRFilterModel.dat", model);
+                            string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
+                            using (var sW = new StreamWriter(directoryRoot + @"\Model\NB\\BinaryNBSWRFile.dat"))
+                            {
+                                sW.Write(content);
+                            }
+                        }
+                        // if exists then read the file and use the model
+                        else
+                        {
+                            model = Helper.Helper.ReadFromBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\BinaryNBSWRFilterModel.dat");
+                        }
+                        break;
+
+                    //Case Stemming
+                    case TextFilterType.Stemming:
+                        exists = BinaryNBSTCheckifModelExists(trainingDatatsetFilePath);
+                        //if does not exists then build model and save it and save the file also for current filter
+                        if (!exists)
+                        {
+                            model.buildClassifier(trainInsts);
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\BinaryNBSTFilterModel.dat", model);
+                            string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
+                            using (var sW = new StreamWriter(directoryRoot + @"\Model\NB\\BinaryNBSTFile.dat"))
+                            {
+                                sW.Write(content);
+                            }
+                        }
+                        // if exists then read the file and use the model
+                        else
+                        {
+                            model = Helper.Helper.ReadFromBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\BinaryNBSTFilterModel.dat");
+                        }
+                        break;
+
+                    //Case Stopwords Removal with Stemming
+                    case TextFilterType.StopwordsRemovalStemming:
+                        exists = BinaryNBSWRSTCheckifModelExists(trainingDatatsetFilePath);
+                        //if does not exists then build model and save it and save the file also for current filter
+                        if (!exists)
+                        {
+                            model.buildClassifier(trainInsts);
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\BinaryNBSWRSTFilterModel.dat", model);
+                            string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
+                            using (var sW = new StreamWriter(directoryRoot + @"\Model\NB\\BinaryNBSWRSTFile.dat"))
+                            {
+                                sW.Write(content);
+                            }
+                        }
+                        // if exists then read the file and use the model
+                        else
+                        {
+                            model = Helper.Helper.ReadFromBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\BinaryNBSWRSTFilterModel.dat");
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                for (int i = 0; i < classifyInsts.numInstances(); i++)
+                {
+                    classifyInsts.instance(i).setClassMissing();
+                    double cls = model.classifyInstance(classifyInsts.instance(i));
+                    classifyInsts.instance(i).setClassValue(cls);
+                    classification = cls == 0 ? "NFR"
+                                    : "Mis";
+                    tempAllClassification.Add(classification);
+                }
+                AllClassification = tempAllClassification;
+            }
+            catch (Exception o)
+            {
+                error = o.ToString();
+            }
+
+        }
+
+        /// <summary>
+        /// Check if Naive Bayes model for stopword removal with stemming already exists
+        /// </summary>
+        /// <returns></returns>
+        private bool BinaryNBSWRSTCheckifModelExists(string trainingDatatsetFilePath)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
+            var folder = directoryRoot + @"\Model\NB";
+            if (System.IO.File.Exists(folder + @"\BinaryNBSWRSTFilterModel.dat") && System.IO.File.Exists(folder + @"\BinaryNBSWRSTFile.dat"))
+            {
+                var isEqual = System.IO.File.ReadLines(folder + @"\BinaryNBSWRSTFile.dat").SequenceEqual(System.IO.File.ReadLines(trainingDatatsetFilePath));
+                return isEqual;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Check if Naive Bayes model for stemming already exists
+        /// </summary>
+        /// <returns></returns>
+        private bool BinaryNBSTCheckifModelExists(string trainingDatatsetFilePath)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+            var folder = directoryRoot + @"\Model\NB";
+            if (System.IO.File.Exists(folder + @"\BinaryNBSTFilterModel.dat") && System.IO.File.Exists(folder + @"\BinaryNBSTFile.dat"))
+            {
+                var isEqual = System.IO.File.ReadLines(folder + @"\BinaryNBSTFile.dat").SequenceEqual(System.IO.File.ReadLines(trainingDatatsetFilePath));
+                return isEqual;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Check if Naive Bayes model for stopwords removal already exists
+        /// </summary>
+        /// <returns></returns>
+        private bool BinaryNBSWRCheckifModelExists(string trainingDatatsetFilePath)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+            var folder = directoryRoot + @"\Model\NB";
+            if (System.IO.File.Exists(folder + @"\BinaryNBSWRFilterModel.dat") && System.IO.File.Exists(folder + @"\BinaryNBSWRFile.dat"))
+            {
+                var isEqual = System.IO.File.ReadLines(folder + @"\BinaryNBSWRFile.dat").SequenceEqual(System.IO.File.ReadLines(trainingDatatsetFilePath));
+                return isEqual;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Check if Naive Bayes model for no filter already exists
+        /// </summary>
+        /// <returns></returns>
+        private bool BinaryNBNoFilterCheckifModelExists(string trainingDatatsetFilePath)
+        {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+            var folder = directoryRoot + @"\Model\NB";
+            if (System.IO.File.Exists(folder + @"\BinaryNBNoFilterModel.dat") && System.IO.File.Exists(folder + @"\BinaryNBNoFilterFile.dat"))
+            {
+                var isEqual = System.IO.File.ReadLines(folder + @"\BinaryNBNoFilterFile.dat").SequenceEqual(System.IO.File.ReadLines(trainingDatatsetFilePath));
+                return isEqual;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion Binary Naive Bayes
+
+
+        #region Multi Class Naive Bayes
+
         /// <summary>
         /// Filtered Naive Bayes Classification with type specified. i.e. BOF or BOW
         /// </summary>
@@ -166,7 +505,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -184,7 +523,7 @@ namespace WekaClassifier
                 {
                     trainingDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\BOW Dataset.arff";
                 }
-                
+
                 var testDatasetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Test.arff";
 
                 if (trainingFilePath != null)
@@ -199,7 +538,7 @@ namespace WekaClassifier
                 Instances classifyInsts = new Instances(classifyReader);
 
                 trainInsts.setClassIndex(trainInsts.numAttributes() - 1);
-                
+
                 classifyInsts.setClassIndex(classifyInsts.numAttributes() - 1);
 
                 FilteredClassifier model = new FilteredClassifier();
@@ -224,7 +563,7 @@ namespace WekaClassifier
                         if (!exists)
                         {
                             model.buildClassifier(trainInsts);
-                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\NBNoFilterModel.dat", model); 
+                            Helper.Helper.WriteToBinaryFile<FilteredClassifier>(directoryRoot + @"\Model\NB\NBNoFilterModel.dat", model);
 
                             string content = System.IO.File.ReadAllText(trainingDatatsetFilePath);
                             using (var sW = new StreamWriter(directoryRoot + @"\Model\NB\\NBNoFilterFile.dat"))
@@ -332,7 +671,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -362,7 +701,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -391,7 +730,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -420,7 +759,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -440,6 +779,10 @@ namespace WekaClassifier
             }
         }
 
+        #endregion Multi Class Naive Bayes
+
+        #region Multi Class SVM
+
         /// <summary>
         /// Filtered Support Vector Machine Classification with type specified. i.e. BOF or BOW
         /// </summary>
@@ -449,13 +792,13 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
                 Directory.CreateDirectory(specificFolder);
 
-            
+
 
             try
             {
@@ -621,7 +964,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -651,7 +994,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -681,7 +1024,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -711,7 +1054,7 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -731,6 +1074,7 @@ namespace WekaClassifier
                 return false;
             }
         }
-  
+
+        #endregion Multi Class SVM
     }
 }

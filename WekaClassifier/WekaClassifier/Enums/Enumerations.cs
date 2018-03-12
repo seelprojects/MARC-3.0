@@ -25,5 +25,14 @@ namespace WekaClassifier.Enums
         StopwordsRemoval,
         Stemming,
         StopwordsRemovalStemming
-    };
+    }
+
+    /// <summary>
+    /// Public enumerations for Classification Scheme
+    /// </summary>
+    public enum ClassificationScheme
+    {
+        Binary,
+        MultiClass
+    }
 }

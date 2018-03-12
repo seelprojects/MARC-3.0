@@ -42,7 +42,7 @@ namespace WpfApplicationTest
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -81,7 +81,7 @@ namespace WpfApplicationTest
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -131,7 +131,7 @@ namespace WpfApplicationTest
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your Specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -204,7 +204,7 @@ namespace WpfApplicationTest
                     var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
                     // Combine the base folder with your specific folder....
-                    string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+                    string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
 
                     // Check if folder exists and if not, create it
                     if (!Directory.Exists(specificFolder))
