@@ -181,6 +181,67 @@ namespace MARC2.Model
         }
 
 
+        #region NFR
+
+        private List<string> dependabilityList;
+        public List<string> DependabilityList
+        {
+            get { return dependabilityList; }
+            set
+            {
+                if (value != dependabilityList)
+                {
+                    dependabilityList = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("DependabilityList"));
+                }
+            }
+        }
+
+        private List<string> performanceList;
+        public List<string> PerformanceList
+        {
+            get { return performanceList; }
+            set
+            {
+                if (value != performanceList)
+                {
+                    performanceList = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("PerformanceList"));
+                }
+            }
+        }
+
+        private List<string> supportabilityList;
+        public List<string> SupportabilityList
+        {
+            get { return supportabilityList; }
+            set
+            {
+                if (value != supportabilityList)
+                {
+                    supportabilityList = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("SupportabilityList"));
+                }
+            }
+        }
+
+        private List<string> usabilityList;
+        public List<string> UsabilityList
+        {
+            get { return usabilityList; }
+            set
+            {
+                if (value != usabilityList)
+                {
+                    usabilityList = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("UsabilityList"));
+                }
+            }
+        }
+
+        #endregion NFR
+
+
         private bool importedFromLocal = false;
         public bool ImportedFromLocal
         {

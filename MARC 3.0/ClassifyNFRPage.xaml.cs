@@ -583,6 +583,21 @@ namespace MARC2
             }
         }
 
+
+
+        /// <summary>
+        /// Browse Custom Indicator Terms List Folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void browseCITFileButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        #region Mouse Scroll Handlers
+
         /// <summary>
         /// Vertical Scroll Event Handler for Dependability ListBox
         /// </summary>
@@ -681,14 +696,8 @@ namespace MARC2
         }
 
 
-        /// <summary>
-        /// Browse Custom Indicator Terms List Folder
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void browseCITFileButton_Click(object sender, RoutedEventArgs e)
-        {
+        #endregion Mouse Scroll Handlers
 
-        }
+       
     }
 }
