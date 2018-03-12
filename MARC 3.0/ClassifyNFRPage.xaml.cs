@@ -346,10 +346,7 @@ namespace MARC2
             try
             {
                 classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType, ClassificationScheme.Binary);
-                foreach (string data in classifier.AllClassification)
-                {
-                    allClassification.Add(data);
-                }
+                
             }
             catch (Exception e)
             {

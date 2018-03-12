@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using weka.classifiers.bayes;
 using weka.classifiers.meta;
@@ -38,19 +39,35 @@ namespace WekaClassifier
 
         public List<string> AllClassification { get; set; }
 
+        public List<string> AllBinaryClassification { get; set; }
 
+        public List<string> predictedData { get; private set; }
+        public List<string> predictedLabel { get; private set; }
 
+        List<string> DependabilityWords = new List<string>();
+        List<string> PerformanceWords = new List<string>();
+        List<string> SupportabilityWords = new List<string>();
+        List<string> UsabilityWords = new List<string>();
+
+        List<string> DependabilityWordsExtra = new List<string> { "crash", "log", "issue", "accur" };
+        List<string> PerformanceWordsExtra = new List<string> { "slow", "battery", "lag", "notif", "speed" };
+        List<string> SupportabilityWordsExtra = new List<string> { "sync", "ipad", "support", "fitbit" };
+        List<string> UsabilityWordsExtra = new List<string> { "feature", "screen", "optio", "hear", "version" };
 
 
         /// <summary>
         /// This is the constructor for BOW single review classification. Overloaded Method
         /// </summary>
         /// <param name="singleReviewBOW"></param>
-        public WekaClassifier(List<string> inputBoWList, string trainingFilePath, string directoryName, ClassifierName classifierName, TextFilterType textFilterType, ClassificationScheme classificationScheme = ClassificationScheme.MultiClass)
+        public WekaClassifier(List<string> inputBoWList, string trainingFilePath, string directoryName, ClassifierName classifierName, TextFilterType textFilterType, ClassificationScheme classificationScheme = ClassificationScheme.MultiClass, string dictionaryListFilePath = null)
         {
             if (classificationScheme == ClassificationScheme.Binary)
             {
+                //Step 1: Contruct Arff File
                 ConstructBinaryBOWArffFile(inputBoWList, directoryName);
+
+                //Step 2: Isolate NFR concerns using Binary Classification
+                List<string> extractedNFRconcernsList = new List<string>();
                 switch (classifierName)
                 {
                     case ClassifierName.SupportVectorMachine:
@@ -62,6 +79,19 @@ namespace WekaClassifier
                     default:
                         break;
                 }
+                for (int i = 0; i < inputBoWList.Count; i++)
+                {
+                    if (AllBinaryClassification[i] == "NFR") { extractedNFRconcernsList.Add(inputBoWList[i]); }
+                }
+                try
+                {
+                    predictedData = extractedNFRconcernsList;
+                }
+                catch (Exception e)
+                {
+                }
+                //Step 3: Dictionary Matching
+                PerformDictionaryMatching(extractedNFRconcernsList, dictionaryListFilePath);
             }
             else
             {
@@ -80,8 +110,115 @@ namespace WekaClassifier
             }
         }
 
+        private void PerformDictionaryMatching(List<string> extractedNFRconcernsList, string dictionaryListFilePath)
+        {
+            //Step 1: Read Dictionary List
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
 
 
+            if (dictionaryListFilePath != null)
+            {
+                specificFolder = dictionaryListFilePath;
+            }
+            try
+            {
+                DependabilityWords.Clear();
+                PerformanceWords.Clear();
+                SupportabilityWords.Clear();
+                UsabilityWords.Clear();
+
+                #region Read NFR words
+                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Dependability Words.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+
+                        DependabilityWords.Add(line);
+                    }
+                }
+
+                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Performance Words.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+
+                        PerformanceWords.Add(line);
+                    }
+                }
+
+                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Supportability Words.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+
+                        SupportabilityWords.Add(line);
+                    }
+                }
+
+                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Usability Words.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+
+                        UsabilityWords.Add(line);
+                    }
+                }
+                #endregion Read NFR words
+
+                predictedLabel = new List<string>(new string[extractedNFRconcernsList.Count]);
+
+                for (int i = 0; i < extractedNFRconcernsList.Count; i++)
+                {
+
+                    int depScore = DependabilityWords.Count(s => extractedNFRconcernsList[i].ToLower().Contains(s.ToLower()));
+                    int perScore = PerformanceWords.Count(s => extractedNFRconcernsList[i].ToLower().Contains(s.ToLower()));
+                    int supScore = SupportabilityWords.Count(s => extractedNFRconcernsList[i].ToLower().Contains(s.ToLower()));
+                    int usaScore = UsabilityWords.Count(s => extractedNFRconcernsList[i].ToLower().Contains(s.ToLower()));
+
+                    depScore += DependabilityWordsExtra.Count(s => extractedNFRconcernsList[i].ToLower().Contains(s.ToLower()));
+                    perScore += PerformanceWordsExtra.Count(s => extractedNFRconcernsList[i].ToLower().Contains(s.ToLower()));
+                    supScore += SupportabilityWordsExtra.Count(s => extractedNFRconcernsList[i].ToLower().Contains(s.ToLower()));
+                    usaScore += UsabilityWordsExtra.Count(s => extractedNFRconcernsList[i].ToLower().Contains(s.ToLower()));
+
+                    int matchThreshold = (WordCount(extractedNFRconcernsList[i]) < 12) ? 0 : 1;
+
+                    if (depScore > matchThreshold) { predictedLabel[i] = "Dep"; }
+                    if (perScore > matchThreshold) { predictedLabel[i] = predictedLabel[i] == null ? "Per" : predictedLabel[i] + ",Per"; }
+                    if (supScore > matchThreshold) { predictedLabel[i] = predictedLabel[i] == null ? "Sup" : predictedLabel[i] + ",Sup"; }
+                    if (usaScore > matchThreshold) { predictedLabel[i] = predictedLabel[i] == null ? "Usa" : predictedLabel[i] + ",Usa"; }
+                    
+                    if (predictedLabel[i] == null) { predictedLabel[i] = "Mis"; }
+                }
+
+                
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+
+        public int WordCount(string txtToCount)
+        {
+            string pattern = "\\w+";
+            Regex regex = new Regex(pattern);
+
+            int CountedWords = regex.Matches(txtToCount).Count;
+
+            return CountedWords;
+        }
 
         private void ConstructBinaryBOWArffFile(List<string> inputBoWList, string directoryName)
         {
@@ -364,7 +501,7 @@ namespace WekaClassifier
                                     : "Mis";
                     tempAllClassification.Add(classification);
                 }
-                AllClassification = tempAllClassification;
+                AllBinaryClassification = tempAllClassification;
             }
             catch (Exception o)
             {
@@ -939,7 +1076,7 @@ namespace WekaClassifier
                                     : "Other";
                     tempAllClassification.Add(classification);
                 }
-                AllClassification = tempAllClassification;
+                AllBinaryClassification = tempAllClassification;
             }
             catch (Exception o)
             {
