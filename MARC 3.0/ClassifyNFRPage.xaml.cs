@@ -71,8 +71,10 @@ namespace MARC2
             DTCheckbox.IsChecked = true;
             DITCheckbox.IsChecked = true;
             
-            bugReportsHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Bug Reports");
-            userRequirementsHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "User Requirements");
+            dependabilityHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Dependability");
+            performanceHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Performance");
+            supportabilityHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Supportability");
+            usabilityHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Usability");
 
             PopulateViewFromModel();
         }
@@ -84,64 +86,63 @@ namespace MARC2
         private void PopulateViewFromModel()
         {
             List<ReviewItem> items = new List<ReviewItem>();
-            if (Model.BugReportList != null)
-            {
-                foreach (var item in Model.BugReportList)
-                {
-                    items.Add(new ReviewItem() { Review = item });
-                }
-                bugReportListbox.ItemsSource = items;
-                noBugReportTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
 
-            items = new List<ReviewItem>();
-            if (Model.UserRequirementList != null)
-            {
-                foreach (var item in Model.UserRequirementList)
-                {
-                    items.Add(new ReviewItem() { Review = item });
-                }
-                userRequirementListbox.ItemsSource = items;
-                noUserRequirementTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
+            //if (Model.BugReportList != null)
+            //{
+            //    foreach (var item in Model.BugReportList)
+            //    {
+            //        items.Add(new ReviewItem() { Review = item });
+            //    }
+            //    bugReportListbox.ItemsSource = items;
+            //    noBugReportTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            //}
 
-            //Update Pie Chart for Bug Reports, User Requirements and Miscellaneous
+            //items = new List<ReviewItem>();
+            //if (Model.UserRequirementList != null)
+            //{
+            //    foreach (var item in Model.UserRequirementList)
+            //    {
+            //        items.Add(new ReviewItem() { Review = item });
+            //    }
+            //    userRequirementListbox.ItemsSource = items;
+            //    noUserRequirementTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            //}
 
-            try
-            {
-                if (Model.ClassfyReviewsResultsCollection != null && Model.ClassfyReviewsResultsCollection.Count > 0)
-                    Model.ClassfyReviewsResultsCollection.Clear();
+            ////Update Pie Chart for Bug Reports, User Requirements and Miscellaneous
 
-                Model.ClassfyReviewsResultsCollection.Add(
-                    new PieSeries
-                    {
-                        Title = "Bug Reports",
-                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.BugReportList != null ? Model.BugReportList.Count : 0) },
-                        DataLabels = true
-                    });
-                Model.ClassfyReviewsResultsCollection.Add(
-                    new PieSeries
-                    {
-                        Title = "User Requirements",
-                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.UserRequirementList != null ? Model.UserRequirementList.Count : 0) },
-                        DataLabels = true
-                    });
-                Model.ClassfyReviewsResultsCollection.Add(
-                    new PieSeries
-                    {
-                        Title = "Miscellaneous",
-                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.MiscellaneousList != null ? Model.MiscellaneousList.Count : 0) },
-                        DataLabels = true
-                    });
+            //try
+            //{
+            //    if (Model.ClassfyReviewsResultsCollection != null && Model.ClassfyReviewsResultsCollection.Count > 0)
+            //        Model.ClassfyReviewsResultsCollection.Clear();
 
-
-                progressBarContainer.Visibility = Visibility.Hidden;
+            //    Model.ClassfyReviewsResultsCollection.Add(
+            //        new PieSeries
+            //        {
+            //            Title = "Bug Reports",
+            //            Values = new ChartValues<ObservableValue> { new ObservableValue(Model.BugReportList != null ? Model.BugReportList.Count : 0) },
+            //            DataLabels = true
+            //        });
+            //    Model.ClassfyReviewsResultsCollection.Add(
+            //        new PieSeries
+            //        {
+            //            Title = "User Requirements",
+            //            Values = new ChartValues<ObservableValue> { new ObservableValue(Model.UserRequirementList != null ? Model.UserRequirementList.Count : 0) },
+            //            DataLabels = true
+            //        });
+            //    Model.ClassfyReviewsResultsCollection.Add(
+            //        new PieSeries
+            //        {
+            //            Title = "Miscellaneous",
+            //            Values = new ChartValues<ObservableValue> { new ObservableValue(Model.MiscellaneousList != null ? Model.MiscellaneousList.Count : 0) },
+            //            DataLabels = true
+            //        });
 
 
-            }
-            catch (Exception ex)
-            {
-            }
+            //    progressBarContainer.Visibility = Visibility.Hidden;
+            //}
+            //catch (Exception ex)
+            //{
+            //}
         }
 
         /// <summary>
@@ -149,7 +150,7 @@ namespace MARC2
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ApproachCheckbox_Checked(object sender, RoutedEventArgs e)
+        private void ITApproachCheckbox_Checked(object sender, RoutedEventArgs e)
         {
             if (!changeInProgress)
             {
@@ -200,7 +201,7 @@ namespace MARC2
                 changeInProgress = true;
                 NBCheckbox.IsChecked = false;
                 SVMCheckbox.IsChecked = false;
-                //RFCheckbox.IsChecked = false;
+                
                 (sender as CheckBox).IsChecked = true;
                 changeInProgress = false;
             }
@@ -583,18 +584,18 @@ namespace MARC2
         }
 
         /// <summary>
-        /// Vertical Scroll Event Handler for Bug Report ListBox
+        /// Vertical Scroll Event Handler for Dependability ListBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void instScroll_Loaded(object sender, RoutedEventArgs e)
         {
-            bugReportListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH), true);
+            dependabilityListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH), true);
         }
 
 
         /// <summary>
-        /// Vertical Scroll Initiator for Bug Report Listbox
+        /// Vertical Scroll Initiator for Dependability Listbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -608,7 +609,7 @@ namespace MARC2
 
 
         /// <summary>
-        /// Vertical Scroll Initiator for User Requirements Listbox
+        /// Vertical Scroll Initiator for Performance Listbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -622,13 +623,61 @@ namespace MARC2
 
 
         /// <summary>
-        /// Vertical Scroll Handler for User Requirement Listbox
+        /// Vertical Scroll Handler for Performance Listbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void instScroll2_Loaded(object sender, RoutedEventArgs e)
         {
-            userRequirementListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
+            performanceListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Handler for Supportability Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void instScroll3_Loaded(object sender, RoutedEventArgs e)
+        {
+            supportabilityListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH3), true);
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Initiator for Supportability Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyMouseWheelH3(object sender, RoutedEventArgs e)
+        {
+            MouseWheelEventArgs eargs = (MouseWheelEventArgs)e;
+            double x = (double)eargs.Delta;
+            double y = instScroll3.VerticalOffset;
+            instScroll3.ScrollToVerticalOffset(y - x);
+        }
+
+        /// <summary>
+        /// Vertical Scroll Handler for Usability Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void instScroll4_Loaded(object sender, RoutedEventArgs e)
+        {
+            usabilityListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH4), true);
+        }
+
+        /// <summary>
+        /// Vertical Scroll Initiator for Usability Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyMouseWheelH4(object sender, RoutedEventArgs e)
+        {
+            MouseWheelEventArgs eargs = (MouseWheelEventArgs)e;
+            double x = (double)eargs.Delta;
+            double y = instScroll4.VerticalOffset;
+            instScroll4.ScrollToVerticalOffset(y - x);
         }
 
 

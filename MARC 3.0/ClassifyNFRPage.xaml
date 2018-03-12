@@ -134,11 +134,11 @@
 
                             <!-- Default Indicator Terms List -->
                             <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Default Indicator Term List</TextBlock>-->
-                            <CheckBox Name="DITCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Default List"  HorizontalAlignment="Left" Click="ApproachCheckbox_Checked" Unchecked="ApproachCheckbox_Checked"/>
+                            <CheckBox Name="DITCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Default List"  HorizontalAlignment="Left" Click="ITApproachCheckbox_Checked" Unchecked="ITApproachCheckbox_Checked"/>
 
                             <!-- Custom Indicator Terms List-->
                             <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Custom Indicator Term List</TextBlock>-->
-                            <CheckBox Name="CITCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Custom List" HorizontalAlignment="Left" Checked="ApproachCheckbox_Checked" Unchecked="ApproachCheckbox_Checked"/>
+                            <CheckBox Name="CITCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Custom List" HorizontalAlignment="Left" Checked="ITApproachCheckbox_Checked" Unchecked="ITApproachCheckbox_Checked"/>
                             <StackPanel  Grid.Row="2" Grid.ColumnSpan="5" Grid.Column="0">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -169,15 +169,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
 
             </Grid.RowDefinitions>
-            <!--Bug Reports List Section-->
+            <!--Dependability List Section-->
             <materialDesign:Card Margin="0,5" Grid.Row="0">
-                <GroupBox  Name="bugReportsHeader" Grid.Row="0" Header="Bug Reports" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.RowSpan="1">
+                <GroupBox  Name="dependabilityHeader" Grid.Row="0" Header="Dependability" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.RowSpan="1">
                     <StackPanel>
-                        <TextBlock Name="noBugReportTextBlock" Margin="0,0,0,10" Text="You currently have no bug report." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <TextBlock Name="noDependabilityTextBlock" Margin="0,0,0,10" Text="You currently have no dependability concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
                         <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
-                            <ListBox x:Name="bugReportListbox"  AlternationCount="2">
+                            <ListBox x:Name="dependabilityListbox"  AlternationCount="2">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -209,20 +211,90 @@
                 </GroupBox>
             </materialDesign:Card>
 
-            <!--User Requirements List Section-->
+            <!--Performance List Section-->
             <materialDesign:Card Margin="0,5" Grid.Row="1">
-                <GroupBox Name="userRequirementsHeader" Grid.Row="1" Header="User Requirements" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="1">
+                <GroupBox Name="performanceHeader" Grid.Row="1" Header="User Requirements" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="1">
                     <StackPanel>
-                        <TextBlock Name="noUserRequirementTextBlock" Margin="0,20,0,20" Text="You currently have no user requirements." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                        <!--<ListView x:Name="userRequirementListbox" Margin="0,0,0,0">
-                        <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
-                                <GridViewColumn DisplayMemberBinding="{Binding Review}" Header="User Reviews" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
+                        <TextBlock Name="noPerformanceTextBlock" Margin="0,20,0,20" Text="You currently have no performance concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
                         <ScrollViewer Name="instScroll2" Loaded="instScroll2_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
-                            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Visible" x:Name="userRequirementListbox" Margin="0,0,0,0" AlternationCount="2">
+                            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Visible" x:Name="performanceListbox" Margin="0,0,0,0" AlternationCount="2">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Margin="5" Grid.Column="0">
+                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Style.Triggers>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                <Setter Property="Background" Value="AliceBlue"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                <Setter Property="Background" Value="White"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+
+                            </ListBox>
+                        </ScrollViewer>
+                    </StackPanel>
+                </GroupBox>
+            </materialDesign:Card>
+
+            <!--Supportability List Section-->
+            <materialDesign:Card Margin="0,5" Grid.Row="2">
+                <GroupBox  Name="supportabilityHeader" Grid.Row="2" Header="Supportability" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.RowSpan="1">
+                    <StackPanel>
+                        <TextBlock Name="noSupportabilityTextBlock" Margin="0,0,0,10" Text="You currently have no supportability concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <ScrollViewer Name="instScroll3" Loaded="instScroll3_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                            <ListBox x:Name="supportabilityListbox"  AlternationCount="2">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Margin="5" Grid.Column="0">
+                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Style.Triggers>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                <Setter Property="Background" Value="AliceBlue"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                <Setter Property="Background" Value="White"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </ScrollViewer>
+                    </StackPanel>
+                </GroupBox>
+            </materialDesign:Card>
+
+            <!--Usability List Section-->
+            <materialDesign:Card Margin="0,5" Grid.Row="3">
+                <GroupBox Name="usabilityHeader" Grid.Row="3" Header="Usability" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="1">
+                    <StackPanel>
+                        <TextBlock Name="noUsabilityTextBlock" Margin="0,20,0,20" Text="You currently have no usability concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <ScrollViewer Name="instScroll4" Loaded="instScroll4_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Visible" x:Name="usabilityListbox" Margin="0,0,0,0" AlternationCount="2">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
