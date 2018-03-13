@@ -219,6 +219,7 @@ namespace MARC2
                 nfrPageCard.Background = themeColor;
 
                 this.Title = "Mobile Application Review Classifier : NFRs";
+                exportButtonLabel.Content = " Save NFR Results";
                 homeLabel.Foreground = Brushes.Black;
                 classifyLabel.Foreground = Brushes.Black;
                 summarizeLabel.Foreground = Brushes.Black;
@@ -228,16 +229,12 @@ namespace MARC2
                 ChartImportReviews.Visibility = Visibility.Collapsed;
                 ChartFRClassifyReviews.Visibility = Visibility.Collapsed;
                 ChartNFRClassifyReviews.Visibility = Visibility.Visible;
-                exportButton.Visibility = Visibility.Collapsed;
-
-
+                exportButton.Visibility = Visibility.Visible;
             }
             else
             {
                 MessageBox.Show("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
-
         }
 
         /// <summary>
