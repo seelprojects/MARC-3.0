@@ -21,7 +21,7 @@
 
 
     <Page.Resources>
-        <converter:ScrollViewHalfHeightConverter x:Key="convertHeight" />
+        <converter:ScrollViewFourthHeightConverter x:Key="convertHeight" />
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
@@ -174,11 +174,11 @@
 
             </Grid.RowDefinitions>
             <!--Dependability List Section-->
-            <materialDesign:Card Margin="0,5" Grid.Row="0">
+            <materialDesign:Card Margin="0,2" Grid.Row="0">
                 <GroupBox  Name="dependabilityHeader" Grid.Row="0" Header="Dependability" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.RowSpan="1">
                     <StackPanel>
-                        <TextBlock Name="noDependabilityTextBlock" Margin="0,0,0,10" Text="You currently have no dependability concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                        <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                        <TextBlock Name="noDependabilityTextBlock" Margin="0,0,0,5" Text="You currently have no dependability concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=classifyNFRPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
                             <ListBox x:Name="dependabilityListbox"  AlternationCount="2">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
@@ -187,7 +187,7 @@
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Margin="5" Grid.Column="0">
-                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                                <TextBlock FontFamily="Verdana" FontSize="11" Text="{Binding Review}"></TextBlock>
                                             </StackPanel>
                                         </Grid>
                                     </DataTemplate>
@@ -212,11 +212,11 @@
             </materialDesign:Card>
 
             <!--Performance List Section-->
-            <materialDesign:Card Margin="0,5" Grid.Row="1">
+            <materialDesign:Card Margin="0,2" Grid.Row="1">
                 <GroupBox Name="performanceHeader" Grid.Row="1" Header="User Requirements" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="1">
                     <StackPanel>
                         <TextBlock Name="noPerformanceTextBlock" Margin="0,20,0,20" Text="You currently have no performance concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                        <ScrollViewer Name="instScroll2" Loaded="instScroll2_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                        <ScrollViewer Name="instScroll2" Loaded="instScroll2_Loaded"  Height="{Binding ElementName=classifyNFRPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
                             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Visible" x:Name="performanceListbox" Margin="0,0,0,0" AlternationCount="2">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
@@ -225,7 +225,7 @@
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Margin="5" Grid.Column="0">
-                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                                <TextBlock FontFamily="Verdana" FontSize="11" Text="{Binding Review}"></TextBlock>
                                             </StackPanel>
                                         </Grid>
                                     </DataTemplate>
@@ -251,11 +251,11 @@
             </materialDesign:Card>
 
             <!--Supportability List Section-->
-            <materialDesign:Card Margin="0,5" Grid.Row="2">
+            <materialDesign:Card Margin="0,2" Grid.Row="2">
                 <GroupBox  Name="supportabilityHeader" Grid.Row="2" Header="Supportability" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.RowSpan="1">
                     <StackPanel>
                         <TextBlock Name="noSupportabilityTextBlock" Margin="0,0,0,10" Text="You currently have no supportability concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                        <ScrollViewer Name="instScroll3" Loaded="instScroll3_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                        <ScrollViewer Name="instScroll3" Loaded="instScroll3_Loaded"  Height="{Binding ElementName=classifyNFRPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
                             <ListBox x:Name="supportabilityListbox"  AlternationCount="2">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
@@ -264,7 +264,7 @@
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Margin="5" Grid.Column="0">
-                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                                <TextBlock FontFamily="Verdana" FontSize="11" Text="{Binding Review}"></TextBlock>
                                             </StackPanel>
                                         </Grid>
                                     </DataTemplate>
@@ -289,11 +289,11 @@
             </materialDesign:Card>
 
             <!--Usability List Section-->
-            <materialDesign:Card Margin="0,5" Grid.Row="3">
+            <materialDesign:Card Margin="0,2" Grid.Row="3">
                 <GroupBox Name="usabilityHeader" Grid.Row="3" Header="Usability" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="1">
                     <StackPanel>
                         <TextBlock Name="noUsabilityTextBlock" Margin="0,20,0,20" Text="You currently have no usability concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                        <ScrollViewer Name="instScroll4" Loaded="instScroll4_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                        <ScrollViewer Name="instScroll4" Loaded="instScroll4_Loaded"  Height="{Binding ElementName=classifyNFRPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
                             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Visible" x:Name="usabilityListbox" Margin="0,0,0,0" AlternationCount="2">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
@@ -302,7 +302,7 @@
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Margin="5" Grid.Column="0">
-                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                                <TextBlock FontFamily="Verdana" FontSize="11" Text="{Binding Review}"></TextBlock>
                                             </StackPanel>
                                         </Grid>
                                     </DataTemplate>

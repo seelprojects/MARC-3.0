@@ -142,7 +142,7 @@
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Margin="5" Grid.Column="0">
-                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}" />
+                                                <TextBlock FontFamily="Verdana" FontSize="11" Text="{Binding Review}" />
                                             </StackPanel>
                                         </Grid>
                                     </DataTemplate>
