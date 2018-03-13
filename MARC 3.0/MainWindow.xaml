@@ -152,7 +152,7 @@
             <liveCharts:PieChart 
                 Grid.Column="6" 
                 Height="90" 
-                Width="90" 
+                Width="120" 
                 Name="ChartNFRClassifyReviews" 
                 Grid.Row="0"
                 Visibility="Collapsed"
@@ -162,7 +162,7 @@
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Center">
                 <liveCharts:PieChart.ChartLegend>
-                    <liveCharts:DefaultLegend Margin="-250,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
+                    <liveCharts:DefaultLegend Margin="-300,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
                 </liveCharts:PieChart.ChartLegend>
                 <liveCharts:PieChart.DataTooltip>
                     <liveCharts:DefaultTooltip BulletSize="20"></liveCharts:DefaultTooltip>
