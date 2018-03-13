@@ -37,8 +37,9 @@ namespace MARC2
 
         string exceptionMessage;
 
-        List<string> allClassification = new List<string>();
-        List<List<string>> listOfReviewsBoF;
+        List<string> allNFRReviews = new List<string>();
+        List<string> allNFRClassification = new List<string>();
+        
         int currentReviewIndex = 0;
         List<string> filteredReviews;
         TextFilterType txtfilterType = TextFilterType.NoFilter;
@@ -291,37 +292,44 @@ namespace MARC2
         /// <param name="trainingFilePath"></param>
         private void classifyAllAndExportUpdateControl()
         {
-            List<string> bugReports = new List<string>();
-            List<string> userRequirements = new List<string>();
-            List<string> miscellaneous = new List<string>();
+            List<string> dependabilityReviews = new List<string>();
+            List<string> performanceReviews = new List<string>();
+            List<string> supportabilityReviews = new List<string>();
+            List<string> usabilityReviews = new List<string>();
 
-            if (allClassification != null && allClassification.Count > 0)
+            if (allNFRClassification != null && allNFRClassification.Count > 0)
             {
-                for (int i = 0; i < allClassification.Count; i++)
+                for (int i = 0; i < allNFRClassification.Count; i++)
                 {
-                    if (allClassification[i] == "Bug Report")
+                    if (allNFRClassification[i].Contains("Dep"))
                     {
-                        bugReports.Add(Model.ReviewList[i]);
+                        dependabilityReviews.Add(allNFRReviews[i]);
                     }
-                    else if (allClassification[i] == "Feature Request")
+                    if (allNFRClassification[i].Contains("Per"))
                     {
-                        userRequirements.Add(Model.ReviewList[i]);
+                        performanceReviews.Add(allNFRReviews[i]);
                     }
-                    else
+                    if (allNFRClassification[i].Contains("Sup"))
                     {
-                        miscellaneous.Add(Model.ReviewList[i]);
+                        supportabilityReviews.Add(allNFRReviews[i]);
+                    }
+                    if (allNFRClassification[i].Contains("Usa"))
+                    {
+                        usabilityReviews.Add(allNFRReviews[i]);
                     }
                 }
             }
 
 
-            var userRequirmentsTemp = userRequirements.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
-            var bugReportsTemp = bugReports.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
-            var miscellaneousTemp = miscellaneous.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+            var dependabilityReviewsTemp = dependabilityReviews.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+            var performanceReviewsTemp = performanceReviews.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+            var supportabilityReviewsTemp = supportabilityReviews.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+            var usabilityReviewsTemp = usabilityReviews.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
 
-            Model.UserRequirementList = userRequirmentsTemp;
-            Model.BugReportList = bugReportsTemp;
-            Model.MiscellaneousList = miscellaneousTemp;
+            Model.DependabilityList = dependabilityReviewsTemp;
+            Model.PerformanceList = performanceReviewsTemp;
+            Model.SupportabilityList = supportabilityReviewsTemp;
+            Model.UsabilityList = usabilityReviewsTemp;
 
             PopulateViewFromModel();
         }
@@ -335,7 +343,7 @@ namespace MARC2
         {
             ResolveTextFilterType();
             WekaClassifier.WekaClassifier classifier;
-            allClassification = new List<string>();
+            allNFRClassification = new List<string>();
 
             filteredReviews = new List<string>();
             foreach (string review in userReviews)
@@ -346,7 +354,8 @@ namespace MARC2
             try
             {
                 classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType, ClassificationScheme.Binary);
-                
+                allNFRClassification = classifier.predictedLabel;
+                allNFRReviews = classifier.predictedData;
             }
             catch (Exception e)
             {

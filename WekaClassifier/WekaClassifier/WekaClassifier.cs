@@ -785,7 +785,7 @@ namespace WekaClassifier
                                     : "Mis";
                     tempAllClassification.Add(classification);
                 }
-                AllClassification = tempAllClassification;
+                AllBinaryClassification = tempAllClassification;
             }
             catch (Exception o)
             {
