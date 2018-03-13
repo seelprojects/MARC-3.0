@@ -119,7 +119,16 @@
 
                         </Grid>
 
-                        <!--Approach-->
+                       
+                        <!--Moved Classification button from here to below that material design card-->
+                    </StackPanel>
+                </GroupBox>
+            </materialDesign:Card>
+            
+            <materialDesign:Card  Margin="5,5,0,0">
+                <GroupBox Header="Indicator Terms Settings" Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <StackPanel>
+                        <!--Indicator Terms-->
                         <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Margin="0,10,0,10" Text="Select Indicator Terms List"  HorizontalAlignment="Left" TextDecorations="Underline" Visibility="Visible" />
                         <Grid>
                             <Grid.RowDefinitions>
@@ -150,18 +159,22 @@
                                     <Button Grid.Column="2" Foreground="White" FontSize="11" Height="25" Name="browseCITFileButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  HorizontalAlignment="Right" VerticalAlignment="Center" Content="Browse" Click="browseCITFileButton_Click" ></Button>
                                 </Grid>
                             </StackPanel>
-
                         </Grid>
-                        <!--Moved Classification button from here to below that material design card-->
                     </StackPanel>
                 </GroupBox>
             </materialDesign:Card>
+
+
+
             <Button Margin="10,10,0,0" Name="classifyButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="classifyButton_Click" >
                 <StackPanel Height="48" Orientation="Horizontal">
                     <Image Source="Icons/classify-icon.png" Height="36" Width="36"/>
                     <Label Foreground="White" FontSize="12" Margin="0,15,0,0" Content="         Classify                   " HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
+        
+        
+        
         </StackPanel>
 
         <!--Right Content-->
@@ -174,7 +187,7 @@
 
             </Grid.RowDefinitions>
             <!--Dependability List Section-->
-            <materialDesign:Card Margin="0,2" Grid.Row="0">
+            <materialDesign:Card Margin="0,5" Grid.Row="0">
                 <GroupBox  Name="dependabilityHeader" Grid.Row="0" Header="Dependability" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.RowSpan="1">
                     <StackPanel>
                         <TextBlock Name="noDependabilityTextBlock" Margin="0,0,0,5" Text="You currently have no dependability concerns." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
