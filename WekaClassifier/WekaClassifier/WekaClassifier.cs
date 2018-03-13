@@ -1076,7 +1076,7 @@ namespace WekaClassifier
                                     : "Other";
                     tempAllClassification.Add(classification);
                 }
-                AllBinaryClassification = tempAllClassification;
+                AllClassification = tempAllClassification;
             }
             catch (Exception o)
             {
