@@ -294,8 +294,52 @@ namespace MARC2
 
         private void ExportNFRClassificationResultsReview()
         {
-            throw new NotImplementedException();
+            if (Model.DependabilityList == null || Model.DependabilityList.Count == 0 &&
+                Model.PerformanceList == null || Model.PerformanceList.Count == 0 &&
+                Model.SupportabilityList == null || Model.SupportabilityList.Count == 0 &&
+                Model.UsabilityList == null || Model.UsabilityList.Count == 0)
+            {
+                MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (Model.DependabilityList == null || Model.DependabilityList.Count == 0)
+            {
+                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (Model.PerformanceList == null || Model.PerformanceList.Count == 0)
+            {
+                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (Model.SupportabilityList == null || Model.SupportabilityList.Count == 0)
+            {
+                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (Model.UsabilityList == null || Model.UsabilityList.Count == 0)
+            {
+                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            try
+            {
+                if (Model.DependabilityList.Count > 0 || Model.PerformanceList.Count > 0 || Model.SupportabilityList.Count > 0 || Model.UsabilityList.Count > 0)
+                {
+                    var outputDialogFolder = ShowSelectOutputFolderDialog(Actions.Classify);
+                    if (outputDialogFolder != null)
+                    {
+                        string fileName = Model.ImportedFromLocal ? "Imported Reviews Local" : Model.CurrentSource.Replace("Imported Reviews : ", "");
+                        fileName = Regex.Replace(fileName, "[^0-9A-Za-z]+", " ");
+
+                        ExportNFRClassificationResults(outputDialogFolder, fileName);
+                        Process.Start("explorer.exe", outputDialogFolder);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
+
+        
 
         /// <summary>
         /// 
@@ -396,7 +440,7 @@ namespace MARC2
                         string fileName = Model.ImportedFromLocal ? "Imported Reviews Local" : Model.CurrentSource.Replace("Imported Reviews : ", "");
                         fileName = Regex.Replace(fileName, "[^0-9A-Za-z]+", " ");
 
-                        ExportClassificationResults(outputDialogFolder, fileName);
+                        ExportFRClassificationResults(outputDialogFolder, fileName);
                         Process.Start("explorer.exe", outputDialogFolder);
                     }
                 }
@@ -456,7 +500,7 @@ namespace MARC2
         /// </summary>
         /// <param name="outputFolder"></param>
         /// <param name="fileName"></param>
-        private void ExportClassificationResults(string outputFolder, string fileName)
+        private void ExportFRClassificationResults(string outputFolder, string fileName)
         {
             //Write Bug Reports to OutputFolder
             using (var brWriter = new StreamWriter(outputFolder + String.Format(@"\{0} Bug Reports.txt", fileName)))
@@ -492,6 +536,66 @@ namespace MARC2
                         otWriter.WriteLine(item);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Write NFR classification results to the selected folder
+        /// </summary>
+        /// <param name="outputFolder"></param>
+        /// <param name="fileName"></param>
+        private void ExportNFRClassificationResults(string outputFolder, string fileName)
+        {
+            //Write Dependability to OutputFolder
+            using (var dWriter = new StreamWriter(outputFolder + String.Format(@"\{0} Dependability.txt", fileName)))
+            {
+                if (Model.DependabilityList != null && Model.DependabilityList.Count > 0)
+                {
+                    foreach (var item in Model.DependabilityList)
+                    {
+                        dWriter.WriteLine(item);
+                    }
+                }
+                dWriter.Close();
+            }
+
+            //Write Performance to OutputFolder
+            using (var pWriter = new StreamWriter(outputFolder + String.Format(@"\{0} Performance.txt", fileName)))
+            {
+                if (Model.PerformanceList != null && Model.PerformanceList.Count > 0)
+                {
+                    foreach (var item in Model.PerformanceList)
+                    {
+                        pWriter.WriteLine(item);
+                    }
+                }
+                pWriter.Close();
+            }
+
+            //Write Supportability to OutputFolder
+            using (var sWriter = new StreamWriter(outputFolder + String.Format(@"\{0} Supportability.txt", fileName)))
+            {
+                if (Model.SupportabilityList != null && Model.SupportabilityList.Count > 0)
+                {
+                    foreach (var item in Model.SupportabilityList)
+                    {
+                        sWriter.WriteLine(item);
+                    }
+                }
+                sWriter.Close();
+            }
+
+            //Write Usability to OutputFolder
+            using (var uWriter = new StreamWriter(outputFolder + String.Format(@"\{0} Usability.txt", fileName)))
+            {
+                if (Model.UsabilityList != null && Model.UsabilityList.Count > 0)
+                {
+                    foreach (var item in Model.UsabilityList)
+                    {
+                        uWriter.WriteLine(item);
+                    }
+                }
+                uWriter.Close();
             }
         }
 
