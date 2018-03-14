@@ -33,6 +33,24 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <materialDesign:DialogHost IsOpen="False" Name="dialogHost" Grid.Column="1"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel HorizontalAlignment="Center" Margin="16">
+                    <TextBlock FontSize="18" Foreground="Red" HorizontalAlignment="Center" FontWeight="Bold">Error</TextBlock>
+                    <StackPanel Margin="12" Orientation="Vertical" HorizontalAlignment="Center" >
+                        <TextBlock Name="messageTextBlock">Error</TextBlock>
+                        <Button Name="messageTextBlockOKButton" Style="{StaticResource MaterialDesignFlatButton}"
+                                            IsDefault="True"
+                                            Margin="10 10 10 10"
+                                            Click="messageTextBlockOKButton_Click"
+                                            >OK</Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+
         <!--Left Content-->
         <StackPanel Margin="5,0,0,5" Grid.Column="0" >
             <materialDesign:Card  Margin="5,5,0,0">
@@ -119,12 +137,12 @@
 
                         </Grid>
 
-                       
+
                         <!--Moved Classification button from here to below that material design card-->
                     </StackPanel>
                 </GroupBox>
             </materialDesign:Card>
-            
+
             <materialDesign:Card  Margin="5,5,0,0">
                 <GroupBox Header="Indicator Terms Settings" Style="{DynamicResource MaterialDesignCardGroupBox}">
                     <StackPanel>
@@ -172,9 +190,9 @@
                     <Label Foreground="White" FontSize="12" Margin="0,15,0,0" Content="         Classify                   " HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
-        
-        
-        
+
+
+
         </StackPanel>
 
         <!--Right Content-->
@@ -343,6 +361,8 @@
         </Grid>
 
         <!--Loading Spinner-->
+
+
         <StackPanel Visibility="Collapsed" Opacity="0.6" Name="progressBarContainer" Grid.ColumnSpan="2" Background="Black">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
                 <Grid.ColumnDefinitions>
@@ -365,7 +385,6 @@
                             <TextBlock FontSize="14" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">Classification in progress</TextBlock>
                         </StackPanel>
                     </materialDesign:Card>
-
                 </DockPanel>
                 <DockPanel Grid.Column="1" Grid.Row="2">
                     <ProgressBar Visibility="Hidden" Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" Height="119" Width="104" />
@@ -374,4 +393,5 @@
         </StackPanel>
         <Frame x:Name="frame" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="260,-133,-120,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
+
 </Page>

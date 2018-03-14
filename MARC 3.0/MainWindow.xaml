@@ -14,6 +14,15 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}" Title="MARC 3.0" Icon="Icons/MARC.ico" MinWidth="1300" MinHeight="870" UseLayoutRounding="True" WindowStartupLocation="CenterScreen" Height="800">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    
     <Grid Background="LightGray" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -169,6 +178,7 @@
                 </liveCharts:PieChart.DataTooltip>
             </liveCharts:PieChart>
 
+           
 
             <Button  Name="exportButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center" Height="auto" Grid.Column="7" Grid.Row="0" Click="exportResultsButton_Click">
                 <StackPanel Height="48" Orientation="Horizontal">

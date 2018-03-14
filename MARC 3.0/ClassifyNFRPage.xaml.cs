@@ -298,7 +298,9 @@ namespace MARC2
                 if (!validCITFilePath)
                 {
                     progressBarContainer.Visibility = Visibility.Hidden;
-                    MessageBox.Show("Indicator terms folder path invalid or does not contain the required files.");
+                    messageTextBlock.Text = "Indicator terms folder path invalid or does not contain the required files.";
+                    dialogHost.IsOpen = true;
+                    //MessageBox.Show("Indicator terms folder path invalid or does not contain the required files.");
                 }
 
                 if (userReviews.Count != 0 && validCITFilePath)
@@ -517,41 +519,6 @@ namespace MARC2
         }
 
         /// <summary>
-        /// Event handler for Exporting Classification Results
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void exportClassificationResults_button(object sender, RoutedEventArgs e)
-        {
-            if (Model.BugReportList == null || Model.BugReportList.Count == 0)
-            {
-                MessageBox.Show("One or more list may be empty.");
-            }
-            else if (Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
-            {
-                MessageBox.Show("One or more list may be empty.");
-            }
-
-            try
-            {
-                if (Model.BugReportList.Count != 0 || Model.UserRequirementList.Count != 0)
-                {
-                    var outputDialogFolder = ShowSelectOutputFolderDialog();
-                    if (outputDialogFolder != null)
-                    {
-                        ExportClassificationResults(outputDialogFolder);
-                        Process.Start("explorer.exe", outputDialogFolder);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
-
-        /// <summary>
         /// Show Select Output Folder Dialog
         /// </summary>
         /// <returns></returns>
@@ -757,8 +724,12 @@ namespace MARC2
         }
 
 
+
         #endregion Mouse Scroll Handlers
 
-
+        private void messageTextBlockOKButton_Click(object sender, RoutedEventArgs e)
+        {
+            dialogHost.IsOpen = false;
+        }
     }
 }
