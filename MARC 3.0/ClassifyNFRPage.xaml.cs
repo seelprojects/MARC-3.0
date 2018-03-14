@@ -269,6 +269,7 @@ namespace MARC2
                 progressBarContainer.Visibility = Visibility.Hidden;
                 messageTextBlock.Text = "Custom training file field empty.";
                 dialogHost.IsOpen = true;
+                pageContainer.Visibility = Visibility.Visible;
                 validCTFilePath = false;
                 //MessageBox.Show("Custom training file field empty.");
             }
@@ -277,6 +278,7 @@ namespace MARC2
                 progressBarContainer.Visibility = Visibility.Hidden;
                 messageTextBlock.Text = "Custom indicator terms folder field empty.";
                 dialogHost.IsOpen = true;
+                pageContainer.Visibility = Visibility.Visible;
                 validCITFilePath = false;
                 //MessageBox.Show("Custom indicator terms folder field empty.");
             }
@@ -305,6 +307,7 @@ namespace MARC2
             {
                 progressBarContainer.Visibility = Visibility.Hidden;
                 messageTextBlock.Text = "Indicator terms folder path invalid or does not contain the required files.";
+                pageContainer.Visibility = Visibility.Visible;
                 dialogHost.IsOpen = true;
                 //MessageBox.Show("Indicator terms folder path invalid or does not contain the required files.");
             }
@@ -736,6 +739,7 @@ namespace MARC2
         private void messageTextBlockOKButton_Click(object sender, RoutedEventArgs e)
         {
             dialogHost.IsOpen = false;
+            pageContainer.Visibility = Visibility.Collapsed;
         }
     }
 }
