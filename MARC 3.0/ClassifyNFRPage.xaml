@@ -40,9 +40,10 @@
                     <TextBlock FontSize="18" Foreground="Red" HorizontalAlignment="Center" FontWeight="Bold">Error</TextBlock>
                     <StackPanel Margin="12" Orientation="Vertical" HorizontalAlignment="Center" >
                         <TextBlock Name="messageTextBlock">Error</TextBlock>
-                        <Button Name="messageTextBlockOKButton" Style="{StaticResource MaterialDesignFlatButton}"
+                        <Button Name="messageTextBlockOKButton"  Style="{DynamicResource MaterialDesignRaisedAccentButton}"
                                             IsDefault="True"
-                                            Margin="10 10 10 10"
+                                            Margin="10 20 10 10"
+                                MaxWidth="100"
                                             Click="messageTextBlockOKButton_Click"
                                             >OK</Button>
                     </StackPanel>

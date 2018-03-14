@@ -258,66 +258,72 @@ namespace MARC2
             DTCheckboxCheckedState = DTCheckbox.IsChecked ?? false;
             CTCheckboxCheckedState = CTCheckbox.IsChecked ?? false;
 
+            bool validCITFilePath = true;
+            bool validCTFilePath = true;
+            var CTFilePath = browseCustomTrainingFileTextbox.Text;
+            var CITFilePath = browseCITFileTextbox.Text;
 
             //Check For Custom training file option checked and file not selected
             if (CTCheckboxCheckedState && browseCustomTrainingFileTextbox.Text == "")
             {
                 progressBarContainer.Visibility = Visibility.Hidden;
-                MessageBox.Show("Custom training file field empty.");
+                messageTextBlock.Text = "Custom training file field empty.";
+                dialogHost.IsOpen = true;
+                validCTFilePath = false;
+                //MessageBox.Show("Custom training file field empty.");
             }
             else if (CITCheckboxCheckedState && browseCITFileTextbox.Text == "")
             {
                 progressBarContainer.Visibility = Visibility.Hidden;
-                MessageBox.Show("Custom indicator terms folder field empty.");
+                messageTextBlock.Text = "Custom indicator terms folder field empty.";
+                dialogHost.IsOpen = true;
+                validCITFilePath = false;
+                //MessageBox.Show("Custom indicator terms folder field empty.");
             }
-            else
+            else if (CITCheckboxCheckedState && browseCITFileTextbox.Text != "")
             {
-                var CTFilePath = browseCustomTrainingFileTextbox.Text;
-                var CITFilePath = browseCITFileTextbox.Text;
-                bool validCITFilePath = true;
-                if (!string.IsNullOrEmpty(CITFilePath))
+                if
+                   (
+                       File.Exists(CITFilePath + @"\\Dependability Words.txt") &&
+                       File.Exists(CITFilePath + @"\\Performance Words.txt") &&
+                       File.Exists(CITFilePath + @"\\Supportability Words.txt") &&
+                       File.Exists(CITFilePath + @"\\Usability Words.txt") &&
+                       File.Exists(CITFilePath + @"\\Dependability Words Extra.txt") &&
+                       File.Exists(CITFilePath + @"\\Performance Words Extra.txt") &&
+                       File.Exists(CITFilePath + @"\\Supportability Words Extra.txt") &&
+                       File.Exists(CITFilePath + @"\\Usability Words Extra.txt"))
                 {
-                    if 
-                    (
-                        File.Exists(CITFilePath + @"\\Dependability Words.txt") &&
-                        File.Exists(CITFilePath + @"\\Performance Words.txt") &&
-                        File.Exists(CITFilePath + @"\\Supportability Words.txt") &&
-                        File.Exists(CITFilePath + @"\\Usability Words.txt") &&
-                        File.Exists(CITFilePath + @"\\Dependability Words Extra.txt") &&
-                        File.Exists(CITFilePath + @"\\Performance Words Extra.txt") &&
-                        File.Exists(CITFilePath + @"\\Supportability Words Extra.txt") &&
-                        File.Exists(CITFilePath + @"\\Usability Words Extra.txt"))
-                    {
-                        validCITFilePath = true;
-                    }
-                    else
-                    {
-                        validCITFilePath = false;
-                    };
+                    validCITFilePath = true;
                 }
-                if (!validCITFilePath)
+                else
                 {
-                    progressBarContainer.Visibility = Visibility.Hidden;
-                    messageTextBlock.Text = "Indicator terms folder path invalid or does not contain the required files.";
-                    dialogHost.IsOpen = true;
-                    //MessageBox.Show("Indicator terms folder path invalid or does not contain the required files.");
-                }
-
-                if (userReviews.Count != 0 && validCITFilePath)
-                {
-                    var bwClassifyAllAndExport = new BackgroundWorker();
-                    bwClassifyAllAndExport.DoWork += (o, args)
-                        => classifyAllReviews
-                        (
-                            userReviews,
-                            CTCheckboxCheckedState ? CTFilePath : null,
-                            CITCheckboxCheckedState ? CITFilePath : null,
-                            SVMCheckboxCheckedState ? ClassifierName.SupportVectorMachine : ClassifierName.NaiveBayes
-                            );
-                    bwClassifyAllAndExport.RunWorkerCompleted += (o, args) => classifyAllAndExportUpdateControl();
-                    bwClassifyAllAndExport.RunWorkerAsync();
-                }
+                    validCITFilePath = false;
+                };
             }
+
+            if (!validCITFilePath)
+            {
+                progressBarContainer.Visibility = Visibility.Hidden;
+                messageTextBlock.Text = "Indicator terms folder path invalid or does not contain the required files.";
+                dialogHost.IsOpen = true;
+                //MessageBox.Show("Indicator terms folder path invalid or does not contain the required files.");
+            }
+            else if (userReviews.Count != 0 && validCITFilePath && validCTFilePath)
+            {
+                var bwClassifyAllAndExport = new BackgroundWorker();
+                bwClassifyAllAndExport.DoWork += (o, args)
+                    => classifyAllReviews
+                    (
+                        userReviews,
+                        CTCheckboxCheckedState ? CTFilePath : null,
+                        CITCheckboxCheckedState ? CITFilePath : null,
+                        SVMCheckboxCheckedState ? ClassifierName.SupportVectorMachine : ClassifierName.NaiveBayes
+                        );
+                bwClassifyAllAndExport.RunWorkerCompleted += (o, args) => classifyAllAndExportUpdateControl();
+                bwClassifyAllAndExport.RunWorkerAsync();
+            }
+            validCTFilePath = true;
+            validCITFilePath = true;
         }
 
         /// <summary>
