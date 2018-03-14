@@ -168,7 +168,7 @@ namespace MARC2
                    });
 
 
-                progressBarContainer.Visibility = Visibility.Hidden;
+                showDialogHostSpinner(false);
             }
             catch (Exception ex)
             {
@@ -244,7 +244,8 @@ namespace MARC2
         /// <param name="e"></param>
         private void classifyButton_Click(object sender, RoutedEventArgs e)
         {
-            progressBarContainer.Visibility = Visibility.Visible;
+            showDialogHostSpinner(true);
+
 
             var userReviews = Model.ReviewList;
             CITCheckboxCheckedState = CITCheckbox.IsChecked ?? false;
@@ -266,21 +267,16 @@ namespace MARC2
             //Check For Custom training file option checked and file not selected
             if (CTCheckboxCheckedState && browseCustomTrainingFileTextbox.Text == "")
             {
-                progressBarContainer.Visibility = Visibility.Hidden;
-                messageTextBlock.Text = "Custom training file field empty.";
-                dialogHost.IsOpen = true;
-                pageContainer.Visibility = Visibility.Visible;
+                showDialogHostSpinner(false);
+                showMessageDialog("Custom training file field empty.");
                 validCTFilePath = false;
-                //MessageBox.Show("Custom training file field empty.");
+
             }
             else if (CITCheckboxCheckedState && browseCITFileTextbox.Text == "")
             {
-                progressBarContainer.Visibility = Visibility.Hidden;
-                messageTextBlock.Text = "Custom indicator terms folder field empty.";
-                dialogHost.IsOpen = true;
-                pageContainer.Visibility = Visibility.Visible;
+                showDialogHostSpinner(false);
+                showMessageDialog("Custom indicator terms folder field empty.");
                 validCITFilePath = false;
-                //MessageBox.Show("Custom indicator terms folder field empty.");
             }
             else if (CITCheckboxCheckedState && browseCITFileTextbox.Text != "")
             {
@@ -305,11 +301,8 @@ namespace MARC2
 
             if (!validCITFilePath)
             {
-                progressBarContainer.Visibility = Visibility.Hidden;
-                messageTextBlock.Text = "Indicator terms folder path invalid or does not contain the required files.";
-                pageContainer.Visibility = Visibility.Visible;
-                dialogHost.IsOpen = true;
-                //MessageBox.Show("Indicator terms folder path invalid or does not contain the required files.");
+                showDialogHostSpinner(false);
+                showMessageDialog("Indicator terms folder path invalid or does not contain the required files.");
             }
             else if (userReviews.Count != 0 && validCITFilePath && validCTFilePath)
             {
@@ -327,6 +320,8 @@ namespace MARC2
             }
             validCTFilePath = true;
             validCITFilePath = true;
+
+            
         }
 
         /// <summary>
@@ -335,6 +330,8 @@ namespace MARC2
         /// <param name="trainingFilePath"></param>
         private void classifyAllAndExportUpdateControl()
         {
+
+
             List<string> dependabilityReviews = new List<string>();
             List<string> performanceReviews = new List<string>();
             List<string> supportabilityReviews = new List<string>();
@@ -740,6 +737,28 @@ namespace MARC2
         {
             dialogHost.IsOpen = false;
             pageContainer.Visibility = Visibility.Collapsed;
+        }
+
+        private void showMessageDialog(string message)
+        {
+            messageTextBlock.Text = message;
+            pageContainer.Visibility = Visibility.Visible;
+            dialogHost.IsOpen = true;
+        }
+
+        private void showDialogHostSpinner(bool enable)
+        {
+            if (enable)
+            {
+                pageContainer.Visibility = Visibility.Visible;
+                dialogHostSpinner.IsOpen = true;
+            }
+            else
+            {
+                pageContainer.Visibility = Visibility.Collapsed;
+                dialogHostSpinner.IsOpen = false;
+            }
+            
         }
     }
 }
