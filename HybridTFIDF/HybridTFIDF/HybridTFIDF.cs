@@ -80,7 +80,7 @@ namespace HybridTFIDF
                         AddWordToDictionary(word);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception )
                 { }
             }
             CalculateNumberOfOccuranceOfWordsInDocument();
@@ -116,7 +116,7 @@ namespace HybridTFIDF
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //Means there are no reviews at all           
             }
@@ -229,7 +229,7 @@ namespace HybridTFIDF
                     }
                     scores.Add(score/ (double) words.Count);
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
 
                 }         

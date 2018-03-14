@@ -126,7 +126,7 @@ namespace WpfApplicationTest
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void clearSavedModelButton_Click(object sender, RoutedEventArgs e)
+        private void clearSavedModelButton_Click(object sender, RoutedEventArgs e)
         {
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 

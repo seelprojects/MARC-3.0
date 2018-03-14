@@ -91,7 +91,7 @@ namespace MARC2
             {
                 HTFIDFThresholdValue = 0.7;
             }
-            catch (Exception expp)
+            catch (Exception)
             {
                 HTFIDFThresholdValue = 0.7;
             }
@@ -341,7 +341,7 @@ namespace MARC2
                 Directory.CreateDirectory(specificFolder);
 
             var tempPath = Directory.GetCurrentDirectory().ToString();
-
+            
             var summarizationInputFile = specificFolder + "\\SummarizeTemp.txt";
             //Copy reviews to a temp file for LexRank to Read it
             using (var sW = new StreamWriter(summarizationInputFile))
@@ -359,7 +359,7 @@ namespace MARC2
             myProcess.StartInfo.CreateNoWindow = true;
             myProcess.StartInfo.UseShellExecute = false;
             myProcess.StartInfo.FileName = "java";
-            var argument = "-jar \"" + tempPath + "\\SummarizerExecutable.jar\" \"" + summarizationInputFile + "\" LEXRANK " + numberOfReviews;
+            var argument = "-jar \"" + specificFolder + "\\SummarizerExecutable.jar\" \"" + summarizationInputFile + "\" LEXRANK \"" + numberOfReviews;
             myProcess.StartInfo.Arguments = argument;
             myProcess.StartInfo.UseShellExecute = false;
             myProcess.StartInfo.RedirectStandardOutput = true;

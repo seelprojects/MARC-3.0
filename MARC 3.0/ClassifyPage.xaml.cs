@@ -137,7 +137,7 @@ namespace MARC2
 
                 showDialogHostSpinner(false);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
             }
         }

@@ -63,7 +63,7 @@ namespace HybridTF
                         AddWordToDictionary(word);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 { }
             }
             CalculateScoreForEachReview(WordCountsDictionary.Sum(x => x.Value));
@@ -121,7 +121,7 @@ namespace HybridTF
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

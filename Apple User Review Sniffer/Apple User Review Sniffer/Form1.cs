@@ -51,7 +51,7 @@ namespace Apple_User_Review_Sniffer
                     // makeServerCall();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
              
             }
@@ -96,14 +96,14 @@ namespace Apple_User_Review_Sniffer
                             //userReviews.Add();
                             allReviews.Add(entry.content.label);
                         }
-                        catch (Exception exq)
+                        catch (Exception )
                         {
                         }
                     }
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //error
                 return null;

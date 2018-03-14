@@ -169,7 +169,7 @@ namespace MARC2
                 Apple_User_Review_Sniffer.RootObject deserializedObject = JsonConvert.DeserializeObject<Apple_User_Review_Sniffer.RootObject>(jsonObject.ToString());
                 appName = deserializedObject.feed.entry[0].AppName.label;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //MessageBox.Show(ex.Message);
             }
@@ -278,7 +278,7 @@ namespace MARC2
                     Model.ImportedFromLocal = false;
                     ImportedReviewsHeader.Header = Model.CurrentSource;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("Please select an app before importing reviews!");
                     progressBarContainer.Visibility = Visibility.Hidden;
@@ -322,14 +322,14 @@ namespace MARC2
                         {
                             allReviews.Add(entry.content.label);
                         }
-                        catch (Exception exq)
+                        catch (Exception )
                         {
                         }
                     }
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //error
                 return null;
@@ -352,7 +352,7 @@ namespace MARC2
                 {
                     userReviews.AddRange(makeServerCall(appId, i));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

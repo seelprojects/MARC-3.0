@@ -88,7 +88,7 @@ namespace WekaClassifier
                 {
                     predictedData = extractedNFRconcernsList;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
                 //Step 3: Dictionary Matching
@@ -242,7 +242,7 @@ namespace WekaClassifier
                     if (predictedLabel[i] == null) { predictedLabel[i] = "Mis"; }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 exceptionMessage = "Indicator Terms File Read Error";
             }

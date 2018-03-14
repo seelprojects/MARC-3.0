@@ -41,7 +41,7 @@ namespace MARC2
         List<string> allNFRReviews = new List<string>();
         List<string> allNFRClassification = new List<string>();
 
-        int currentReviewIndex = 0;
+        //int currentReviewIndex = 0;
         List<string> filteredReviews;
         TextFilterType txtfilterType = TextFilterType.NoFilter;
 
@@ -170,7 +170,7 @@ namespace MARC2
 
                 showDialogHostSpinner(false);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
             }
         }

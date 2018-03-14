@@ -97,7 +97,7 @@
     </Reference>
     <Reference Include="Summarizer, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Downloads\ikvmbin-7.2.4630.5\ikvm-7.2.4630.5\bin\Summarizer.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\ikvmbin-7.2.4630.5\ikvm-7.2.4630.5\bin\Summarizer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -264,7 +264,6 @@
     <Resource Include="Images\2.PNG" />
     <Resource Include="Images\3.PNG" />
     <Resource Include="Images\4.PNG" />
-    <Content Include="Summarizer.dll" />
     <Resource Include="Icons\Browse-Icon.png" />
     <Resource Include="Icons\browse.ico" />
     <Resource Include="Icons\Download.png" />

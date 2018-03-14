@@ -652,7 +652,7 @@ namespace MARC2
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Something went wrong while writing output. You may not have permission to write on the selected folder. If problem persists contact the author.");
             }

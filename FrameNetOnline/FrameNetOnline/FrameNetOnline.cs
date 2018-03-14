@@ -42,7 +42,7 @@ namespace FrameNetOnline
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

@@ -98,7 +98,7 @@ namespace SumBasic
 
                     tempDict.Add(review, score / (words.Distinct().ToList().Count));
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     return null;
                 }
@@ -139,7 +139,7 @@ namespace SumBasic
                         AddWordToDictionary(word);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 { }
             }
         }
