@@ -135,9 +135,7 @@ namespace MARC2
                     });
 
 
-                progressBarContainer.Visibility = Visibility.Hidden;
-
-
+                showDialogHostSpinner(false);
             }
             catch (Exception ex)
             {
@@ -213,7 +211,7 @@ namespace MARC2
         /// <param name="e"></param>
         private void classifyButton_Click(object sender, RoutedEventArgs e)
         {
-            progressBarContainer.Visibility = Visibility.Visible;
+            showDialogHostSpinner(true);
 
             var userReviews = Model.ReviewList;
             BOFCheckboxCheckedState = BOFCheckbox.IsChecked ?? false;
@@ -231,8 +229,8 @@ namespace MARC2
             //Check For Custom training file option checked and file not selected
             if (CTCheckboxCheckedState && browseCustomTrainingFileTextbox.Text == "")
             {
-                progressBarContainer.Visibility = Visibility.Hidden;
-                MessageBox.Show("Custom training file field empty.");
+                showDialogHostSpinner(false);
+                showMessageDialog("Custom training file field empty.");
             }
             else
             {
@@ -342,7 +340,7 @@ namespace MARC2
                 }
                 else
                 {
-                    MessageBox.Show("Looks like the server is down");
+                    showMessageDialog("Looks like the server is down.");
                 }
             }
             else if (BOWCheckboxCheckedState)
@@ -485,11 +483,12 @@ namespace MARC2
         {
             if (Model.BugReportList == null || Model.BugReportList.Count == 0)
             {
-                MessageBox.Show("One or more list may be empty.");
+                showMessageDialog("One or more list may be empty.");
+                
             }
             else if (Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
             {
-                MessageBox.Show("One or more list may be empty.");
+                showMessageDialog("One or more list may be empty.");
             }
 
             try
@@ -629,6 +628,35 @@ namespace MARC2
         private void instScroll2_Loaded(object sender, RoutedEventArgs e)
         {
             userRequirementListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
+        }
+
+
+        private void messageTextBlockOKButton_Click(object sender, RoutedEventArgs e)
+        {
+            dialogHost.IsOpen = false;
+            pageContainer.Visibility = Visibility.Collapsed;
+        }
+
+        private void showMessageDialog(string message)
+        {
+            messageTextBlock.Text = message;
+            pageContainer.Visibility = Visibility.Visible;
+            dialogHost.IsOpen = true;
+        }
+
+        private void showDialogHostSpinner(bool enable)
+        {
+            if (enable)
+            {
+                pageContainer.Visibility = Visibility.Visible;
+                dialogHostSpinner.IsOpen = true;
+            }
+            else
+            {
+                pageContainer.Visibility = Visibility.Collapsed;
+                dialogHostSpinner.IsOpen = false;
+            }
+
         }
     }
 }

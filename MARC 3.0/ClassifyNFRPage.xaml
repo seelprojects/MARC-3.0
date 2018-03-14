@@ -374,8 +374,7 @@
         </Grid>
 
         <!--Loading Spinner Container-->
-        <StackPanel Visibility="Collapsed" Opacity="0.6" Name="pageContainer" Grid.ColumnSpan="2" Background="Black">
-        </StackPanel>
+        <StackPanel Visibility="Collapsed" Opacity="0.6" Name="pageContainer" Grid.ColumnSpan="2" Background="Black"></StackPanel>
         <Frame x:Name="frame" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="260,-133,-120,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 
