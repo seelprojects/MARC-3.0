@@ -355,7 +355,21 @@ namespace MARC2
             {
                 classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType, ClassificationScheme.Binary);
                 allNFRClassification = classifier.predictedLabel;
-                allNFRReviews = classifier.predictedData;
+                
+                //Instead of adding filtered text add the original review.
+                var temp = new List<string>();
+                foreach (var item in classifier.predictedData)
+                {
+                    for (int i = 0; i < userReviews.Count; i++)
+                    {
+                        if (FilterText(userReviews[i]) == item)
+                        {
+                            temp.Add(userReviews[i]);
+                            break;
+                        }
+                    }
+                }
+                allNFRReviews = temp;
             }
             catch (Exception e)
             {
