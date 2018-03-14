@@ -5,7 +5,11 @@ MARC 3.0 is the second release of our [Mobile Application Review Classifier MARC
 
 ![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/1.PNG)
 
+# Non-Functional Requirements Classification
+![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/3.PNG)
+
 # Summarization
+![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/3.PNG)
 
 MARC 3.0 provides multiple data summarization algorithms that can be used to generate concise and comprehensive summaries of user reviews. These algorithms include Hybrid TF, Hybrid TFIDF, SumBasic, and LexRank.
 
