@@ -62,7 +62,7 @@
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Orientation="Vertical" Margin="32">
                     <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" Height="80" Width="80" />
-                    <TextBlock FontSize="14" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">Import in progress</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Bold" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center">Import in progress</TextBlock>
                 </StackPanel>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
@@ -164,7 +164,6 @@
             <materialDesign:Card Margin="0,5">
                 <GroupBox Name="ImportedReviewsHeader" Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="2">
                     <StackPanel>
-                        <TextBlock FontSize="15" FontFamily="Verdana" Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select an app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
                         <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=wnd, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
                             <ListBox  x:Name="importedReviewsListbox" AlternationCount="2">
                                 <ListBox.ItemTemplate >
@@ -199,8 +198,16 @@
             </materialDesign:Card>
         </Grid>
 
+        <StackPanel Name="noReviewsMessageTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"  Grid.Column="1" Visibility="Visible">
+            <Image MaxHeight="300" MaxWidth="300" Source="/Images/empty.png"/>
+            <TextBlock FontSize="16" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center">You have no user reviews imported.</TextBlock>
+            <TextBlock FontSize="14" FontWeight="Bold" Foreground="Gray" Margin="5" HorizontalAlignment="Center">Please select an app and press import or browse a local file.</TextBlock>
+        </StackPanel>
+        
         <!--Loading Spinner-->
         <StackPanel Visibility="Collapsed" Opacity="0.6" Name="pageContainer" Grid.ColumnSpan="2" Background="Black"></StackPanel>
 
+        
+        
     </Grid>
 </Page>

@@ -57,7 +57,7 @@
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Orientation="Vertical" Margin="32">
                     <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" Height="80" Width="80" />
-                    <TextBlock FontSize="14" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">Summarization in progress</TextBlock>
+                    <TextBlock FontSize="14" FontWeight="Bold" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center">Summarization in progress</TextBlock>
                 </StackPanel>
 
             </materialDesign:DialogHost.DialogContent>

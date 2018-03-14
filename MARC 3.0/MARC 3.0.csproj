@@ -322,6 +322,9 @@
   <ItemGroup>
     <Resource Include="Images\loading-dash.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\empty.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
