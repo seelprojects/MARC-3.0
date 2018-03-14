@@ -47,6 +47,8 @@ namespace MARC2
             Model = model;
             this.DataContext = this;
             ReadLocalAppDataFile();
+            
+            
         }
 
 
@@ -104,7 +106,7 @@ namespace MARC2
             if (newAppInputDialog.ShowDialog() == true)
             {
                 appID = newAppInputDialog.Answer;
-                progressBarContainer.Visibility = Visibility.Visible;
+                showDialogHostSpinner(true);
                 GetiOSAppName(appID);
             }
         }
@@ -137,10 +139,9 @@ namespace MARC2
             }
             else
             {
-                progressBarContainer.Visibility = Visibility.Hidden;
-                MessageBox.Show("App name could not be resolved!");
+                showDialogHostSpinner(false);
+                showMessageDialog("App name could not be resolved!");
             }
-
         }
 
 
@@ -205,8 +206,9 @@ namespace MARC2
 
             if (tempAppIDs.Contains(appID))
             {
-                progressBarContainer.Visibility = Visibility.Hidden;
-                MessageBox.Show("Looks like the app already exists in the app list. Importing review directly", "Duplicate app", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+                showDialogHostSpinner(false);
+                showMessageDialog("Looks like the app already exists in the app list. Importing review directly", "Duplicate app");
             }
             else
             {
@@ -248,7 +250,7 @@ namespace MARC2
             
             if (myAppsListbox.Items.Count > 0)
             {
-                progressBarContainer.Visibility = Visibility.Visible;
+                showDialogHostSpinner(true);
 
                 var selectedIndex = 0;
                 var appId = "";
@@ -280,13 +282,15 @@ namespace MARC2
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please select an app before importing reviews!");
-                    progressBarContainer.Visibility = Visibility.Hidden;
+
+
+                    showMessageDialog("Please select an app before importing reviews!");
+                    showDialogHostSpinner(false);
                 }
             }
             else
             {
-                MessageBox.Show("Your app list contains no apps. Please select \"Add an app\" option to import reviews or select a local text file to import reviews.","No Saved Apps", MessageBoxButton.OK, MessageBoxImage.Question);
+                showMessageDialog("Your app list contains no apps. Please select \"Add an app\" option to import reviews or select a local text file to import reviews.","No Saved Apps");
             }            
         }
 
@@ -379,7 +383,7 @@ namespace MARC2
                 importedReviewsListbox.ItemsSource = items;
                 noReviewsMessageTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
             }
-            progressBarContainer.Visibility = Visibility.Hidden;
+            showDialogHostSpinner(false);
 
             if (Model.ImportedReviewsCollection != null && Model.ImportedReviewsCollection.Count > 0)
             {
@@ -519,6 +523,48 @@ namespace MARC2
             double x = (double)eargs.Delta;
             double y = instScroll.VerticalOffset;
             instScroll.ScrollToVerticalOffset(y - x);
+        }
+
+        /// <summary>
+        /// Message Box OK click event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void messageTextBlockOKButton_Click(object sender, RoutedEventArgs e)
+        {
+            dialogHost.IsOpen = false;
+            pageContainer.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Show Message Dialog using Material Design
+        /// </summary>
+        /// <param name="message"></param>
+        private void showMessageDialog(string message, string title = null)
+        {
+            messageTitle.Text = (title != null) ? title : "Error";
+            messageTextBlock.Text = message;
+            pageContainer.Visibility = Visibility.Visible;
+            dialogHost.IsOpen = true;
+        }
+
+        /// <summary>
+        /// Enable disable Spinner
+        /// </summary>
+        /// <param name="enable"></param>
+        private void showDialogHostSpinner(bool enable)
+        {
+            if (enable)
+            {
+                pageContainer.Visibility = Visibility.Visible;
+                dialogHostSpinner.IsOpen = true;
+            }
+            else
+            {
+                pageContainer.Visibility = Visibility.Collapsed;
+                dialogHostSpinner.IsOpen = false;
+            }
+
         }
     }
 

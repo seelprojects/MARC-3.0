@@ -134,6 +134,7 @@
     <Compile Include="Enums\colors.cs" />
     <Compile Include="Enums\Classifications.cs" />
     <Compile Include="Enums\SummarizationAlgorithm.cs" />
+    <Compile Include="Extensions\GifImage.cs" />
     <Compile Include="Extensions\HexToColor.cs" />
     <Compile Include="Model\MyViewModel.cs" />
     <Compile Include="NewAboutPage.xaml.cs">
@@ -317,6 +318,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loading-dash.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
