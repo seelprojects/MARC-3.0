@@ -201,5 +201,27 @@
 
             </Border>
         </DockPanel>
+
+        <StackPanel Visibility="Collapsed" Opacity="0.6" Name="mainPageContainer" Grid.Row="2" Grid.ColumnSpan="4" Background="Black"></StackPanel>
+        <!--Message Box Dialog-->
+        <materialDesign:DialogHost IsOpen="False" Name="mainDialogHost" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel HorizontalAlignment="Center" Margin="16">
+                    <TextBlock Name="mainMessageTitle" FontSize="18" Foreground="Red" HorizontalAlignment="Center" FontWeight="Bold">Error</TextBlock>
+                    <StackPanel Margin="12" Orientation="Vertical" HorizontalAlignment="Center" >
+                        <TextBlock Name="mainMessageTextBlock">Error</TextBlock>
+                        <Button Name="mainMessageTextBlockOKButton"  Style="{DynamicResource MaterialDesignRaisedAccentButton}"
+                                            IsDefault="True"
+                                            Margin="10 20 10 10"
+                                MaxWidth="100"
+                                            Click="mainMessageTextBlockOKButton_Click"
+                                            >OK</Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        
+
     </Grid>
 </Window>

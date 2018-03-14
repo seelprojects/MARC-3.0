@@ -122,7 +122,8 @@ namespace MARC2
             }
             else
             {
-                MessageBox.Show("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!", "Hold on!");
+                //MessageBox.Show("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -162,7 +163,8 @@ namespace MARC2
             }
             else
             {
-                MessageBox.Show("Looks like you haven't classified any reviews yet. Please import and classify reviews before trying to summarize!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like you haven't classified any reviews yet. Please import and classify reviews before trying to summarize!", "Hold on!");
+                //MessageBox.Show("Looks like you haven't classified any reviews yet. Please import and classify reviews before trying to summarize!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -233,7 +235,8 @@ namespace MARC2
             }
             else
             {
-                MessageBox.Show("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!");
+                //MessageBox.Show("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -299,23 +302,28 @@ namespace MARC2
                 Model.SupportabilityList == null || Model.SupportabilityList.Count == 0 &&
                 Model.UsabilityList == null || Model.UsabilityList.Count == 0)
             {
-                MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data");
+                //MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.DependabilityList == null || Model.DependabilityList.Count == 0)
             {
-                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like one of the lists is empty.", "Partial Export Data");
+                //MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.PerformanceList == null || Model.PerformanceList.Count == 0)
             {
-                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like one of the lists is empty.", "Partial Export Data");
+                //MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.SupportabilityList == null || Model.SupportabilityList.Count == 0)
             {
-                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like one of the lists is empty.", "Partial Export Data");
+                //MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.UsabilityList == null || Model.UsabilityList.Count == 0)
             {
-                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like one of the lists is empty.", "Partial Export Data");
+                //MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             try
@@ -339,7 +347,7 @@ namespace MARC2
             }
         }
 
-        
+
 
         /// <summary>
         /// 
@@ -348,15 +356,18 @@ namespace MARC2
         {
             if (Model.BugReportSummaryList == null || Model.BugReportSummaryList.Count == 0 && Model.UserRequirementsSummaryList == null || Model.UserRequirementsSummaryList.Count == 0)
             {
-                MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data");
+                //MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.BugReportSummaryList == null || Model.BugReportSummaryList.Count == 0)
             {
-                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like one of the lists is empty.", "Partial Export Data");
+                //MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.UserRequirementsSummaryList == null || Model.UserRequirementsSummaryList.Count == 0)
             {
-                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like one of the lists is empty.", "Partial Export Data");
+                //MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             try
@@ -419,15 +430,18 @@ namespace MARC2
         {
             if (Model.BugReportList == null || Model.BugReportList.Count == 0 && Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
             {
-                MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data");
+                //MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.BugReportList == null || Model.BugReportList.Count == 0)
             {
-                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like one of the lists is empty.", "Partial Export Data");
+                //MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
             {
-                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like one of the lists is empty.", "Partial Export Data");
+                //MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             try
@@ -607,7 +621,8 @@ namespace MARC2
         {
             if (Model.ReviewList == null || Model.ReviewList.Count == 0)
             {
-                MessageBox.Show("Looks like there are no reviews to export. Please import reviews before trying to export them to a local file.", "No Export Data!", MessageBoxButton.OK, MessageBoxImage.Information);
+                showMessageDialog("Looks like there are no reviews to export. Please import reviews before trying to export them to a local file.", "No Export Data!");
+                //MessageBox.Show("Looks like there are no reviews to export. Please import reviews before trying to export them to a local file.", "No Export Data!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             try
@@ -654,10 +669,32 @@ namespace MARC2
             }
             catch (Exception)
             {
-                MessageBox.Show("Something went wrong while writing output. You may not have permission to write on the selected folder. If problem persists contact the author.");
+                showMessageDialog("Something went wrong while writing output. You may not have permission to write on the selected folder. If problem persists contact the author.");
+                //MessageBox.Show("Something went wrong while writing output. You may not have permission to write on the selected folder. If problem persists contact the author.");
             }
         }
 
+        /// <summary>
+        /// Message Box OK click event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mainMessageTextBlockOKButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainDialogHost.IsOpen = false;
+            mainPageContainer.Visibility = Visibility.Collapsed;
+        }
 
+        /// <summary>
+        /// Show Message Dialog using Material Design
+        /// </summary>
+        /// <param name="message"></param>
+        private void showMessageDialog(string message, string title = null)
+        {
+            mainMessageTitle.Text = (title != null) ? title : "Error";
+            mainMessageTextBlock.Text = message;
+            mainPageContainer.Visibility = Visibility.Visible;
+            mainDialogHost.IsOpen = true;
+        }
     }
 }
