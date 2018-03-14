@@ -474,14 +474,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WekaClassifier.dll" size="27136">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WekaClassifier.dll" size="27648">
       <assemblyIdentity name="WekaClassifier" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LUznmRwpRVDVH8PIEljlJE/BQYkNfaWivUXUybIBpRs=</dsig:DigestValue>
+        <dsig:DigestValue>/lRxLVuhoX1oTeyDqVeAmriOrFQIn4dkVHVw4zWQXps=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -493,7 +493,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iXm6D0Fj6fyJIEXWoq0xlvIrQBtezltfMIa8Tfb3Bnk=</dsig:DigestValue>
+        <dsig:DigestValue>5yLrPUvZKPghafhs4isGAHdeLwSTn5HwwEQPW+8/r00=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

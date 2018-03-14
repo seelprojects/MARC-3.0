@@ -24,6 +24,7 @@ using MARC2.Model;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Diagnostics;
+using WpfApplicationTest.Enums;
 
 namespace MARC2
 {
@@ -39,7 +40,7 @@ namespace MARC2
 
         List<string> allNFRReviews = new List<string>();
         List<string> allNFRClassification = new List<string>();
-        
+
         int currentReviewIndex = 0;
         List<string> filteredReviews;
         TextFilterType txtfilterType = TextFilterType.NoFilter;
@@ -264,9 +265,15 @@ namespace MARC2
                 progressBarContainer.Visibility = Visibility.Hidden;
                 MessageBox.Show("Custom training file field empty.");
             }
+            else if (CITCheckboxCheckedState && browseCITFileTextbox.Text == "")
+            {
+                progressBarContainer.Visibility = Visibility.Hidden;
+                MessageBox.Show("Custom indicator terms folder field empty.");
+            }
             else
             {
                 var CTFilePath = browseCustomTrainingFileTextbox.Text;
+                var CITFilePath = browseCITFileTextbox.Text;
                 if (userReviews.Count != 0)
                 {
                     var bwClassifyAllAndExport = new BackgroundWorker();
@@ -275,6 +282,7 @@ namespace MARC2
                         (
                             userReviews,
                             CTCheckboxCheckedState ? CTFilePath : null,
+                            CITCheckboxCheckedState ? CITFilePath : null,
                             SVMCheckboxCheckedState ? ClassifierName.SupportVectorMachine : ClassifierName.NaiveBayes
                             );
                     bwClassifyAllAndExport.RunWorkerCompleted += (o, args) => classifyAllAndExportUpdateControl();
@@ -339,7 +347,7 @@ namespace MARC2
         /// </summary>
         /// <param name="userReviews"></param>
         /// <param name="trainingFilePath"></param>
-        private void classifyAllReviews(List<string> userReviews, string trainingFilePath, ClassifierName classifierName)
+        private void classifyAllReviews(List<string> userReviews, string trainingFilePath, string indicatorTermFilePath, ClassifierName classifierName)
         {
             ResolveTextFilterType();
             WekaClassifier.WekaClassifier classifier;
@@ -353,9 +361,9 @@ namespace MARC2
 
             try
             {
-                classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType, ClassificationScheme.Binary);
+                classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType, ClassificationScheme.Binary, indicatorTermFilePath);
                 allNFRClassification = classifier.predictedLabel;
-                
+
                 //Instead of adding filtered text add the original review.
                 var temp = new List<string>();
                 foreach (var item in classifier.predictedData)
@@ -375,7 +383,6 @@ namespace MARC2
             {
                 exceptionMessage = e.ToString();
             }
-
         }
 
         /// <summary>
@@ -601,7 +608,29 @@ namespace MARC2
         /// <param name="e"></param>
         private void browseCITFileButton_Click(object sender, RoutedEventArgs e)
         {
+            var dlg = new CommonOpenFileDialog();
 
+
+            dlg.Title = "MARC 3.0 : Select Indicator Terms List Folder";
+
+
+            dlg.IsFolderPicker = true;
+            dlg.InitialDirectory = Directory.GetCurrentDirectory();
+
+            dlg.AddToMostRecentlyUsedList = false;
+            dlg.AllowNonFileSystemItems = false;
+            dlg.DefaultDirectory = Directory.GetCurrentDirectory();
+            dlg.EnsureFileExists = true;
+            dlg.EnsurePathExists = true;
+            dlg.EnsureReadOnly = false;
+            dlg.EnsureValidNames = true;
+            dlg.Multiselect = false;
+            dlg.ShowPlacesList = true;
+
+            if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                browseCITFileTextbox.Text = dlg.FileName;
+            }
         }
 
 

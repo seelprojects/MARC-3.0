@@ -36,6 +36,7 @@ namespace WekaClassifier
 
         public string classification { get; set; }
         public string allOutputText { get; set; }
+        public string exceptionMessage { get; set; }
 
         public List<string> AllClassification { get; set; }
 
@@ -49,10 +50,10 @@ namespace WekaClassifier
         List<string> SupportabilityWords = new List<string>();
         List<string> UsabilityWords = new List<string>();
 
-        List<string> DependabilityWordsExtra = new List<string> { "crash", "log", "issue", "accur" };
-        List<string> PerformanceWordsExtra = new List<string> { "slow", "battery", "lag", "notif", "speed" };
-        List<string> SupportabilityWordsExtra = new List<string> { "sync", "ipad", "support", "fitbit" };
-        List<string> UsabilityWordsExtra = new List<string> { "feature", "screen", "optio", "hear", "version" };
+        List<string> DependabilityWordsExtra = new List<string> ();
+        List<string> PerformanceWordsExtra = new List<string>();
+        List<string> SupportabilityWordsExtra = new List<string> ();
+        List<string> UsabilityWordsExtra = new List<string> ();
 
 
         /// <summary>
@@ -140,9 +141,19 @@ namespace WekaClassifier
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
                     {
-
                         DependabilityWords.Add(line);
                     }
+                    sR.Close();
+                }
+
+                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Dependability Words Extra.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        DependabilityWordsExtra.Add(line);
+                    }
+                    sR.Close();
                 }
 
                 using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Performance Words.txt"))
@@ -150,9 +161,18 @@ namespace WekaClassifier
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
                     {
-
                         PerformanceWords.Add(line);
                     }
+                    sR.Close();
+                }
+                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Performance Words Extra.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        PerformanceWordsExtra.Add(line);
+                    }
+                    sR.Close();
                 }
 
                 using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Supportability Words.txt"))
@@ -160,9 +180,18 @@ namespace WekaClassifier
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
                     {
-
                         SupportabilityWords.Add(line);
                     }
+                    sR.Close();
+                }
+                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Supportability Words Extra.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        SupportabilityWordsExtra.Add(line);
+                    }
+                    sR.Close();
                 }
 
                 using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Usability Words.txt"))
@@ -170,10 +199,20 @@ namespace WekaClassifier
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
                     {
-
                         UsabilityWords.Add(line);
                     }
+                    sR.Close();
                 }
+                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Usability Words Extra.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        UsabilityWordsExtra.Add(line);
+                    }
+                    sR.Close();
+                }
+
                 #endregion Read NFR words
 
                 predictedLabel = new List<string>(new string[extractedNFRconcernsList.Count]);
@@ -200,12 +239,10 @@ namespace WekaClassifier
                     
                     if (predictedLabel[i] == null) { predictedLabel[i] = "Mis"; }
                 }
-
-                
             }
             catch (Exception e)
             {
-
+                exceptionMessage = "Indicator Terms File Read Error";
             }
         }
 
