@@ -117,7 +117,9 @@ namespace WekaClassifier
             var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+            string specificFolder = Path.Combine(currDir, "MARC 3.0");
+
+            specificFolder = Path.Combine(specificFolder, @"InputData\TrainingDatasets");
 
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
@@ -136,7 +138,7 @@ namespace WekaClassifier
                 UsabilityWords.Clear();
 
                 #region Read NFR words
-                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Dependability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\Dependability Words.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -146,7 +148,7 @@ namespace WekaClassifier
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Dependability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\Dependability Words Extra.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -156,7 +158,7 @@ namespace WekaClassifier
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Performance Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\Performance Words.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -165,7 +167,7 @@ namespace WekaClassifier
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Performance Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\Performance Words Extra.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -175,7 +177,7 @@ namespace WekaClassifier
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Supportability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\Supportability Words.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -184,7 +186,7 @@ namespace WekaClassifier
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Supportability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\Supportability Words Extra.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -194,7 +196,7 @@ namespace WekaClassifier
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Usability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\Usability Words.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -203,7 +205,7 @@ namespace WekaClassifier
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\InputData\TrainingDatasets\Usability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\Usability Words Extra.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)

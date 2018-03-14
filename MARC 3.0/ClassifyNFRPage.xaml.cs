@@ -274,7 +274,34 @@ namespace MARC2
             {
                 var CTFilePath = browseCustomTrainingFileTextbox.Text;
                 var CITFilePath = browseCITFileTextbox.Text;
-                if (userReviews.Count != 0)
+                bool validCITFilePath = true;
+                if (!string.IsNullOrEmpty(CITFilePath))
+                {
+                    if 
+                    (
+                        File.Exists(CITFilePath + @"\\Dependability Words.txt") &&
+                        File.Exists(CITFilePath + @"\\Performance Words.txt") &&
+                        File.Exists(CITFilePath + @"\\Supportability Words.txt") &&
+                        File.Exists(CITFilePath + @"\\Usability Words.txt") &&
+                        File.Exists(CITFilePath + @"\\Dependability Words Extra.txt") &&
+                        File.Exists(CITFilePath + @"\\Performance Words Extra.txt") &&
+                        File.Exists(CITFilePath + @"\\Supportability Words Extra.txt") &&
+                        File.Exists(CITFilePath + @"\\Usability Words Extra.txt"))
+                    {
+                        validCITFilePath = true;
+                    }
+                    else
+                    {
+                        validCITFilePath = false;
+                    };
+                }
+                if (!validCITFilePath)
+                {
+                    progressBarContainer.Visibility = Visibility.Hidden;
+                    MessageBox.Show("Indicator terms folder path invalid or does not contain the required files.");
+                }
+
+                if (userReviews.Count != 0 && validCITFilePath)
                 {
                     var bwClassifyAllAndExport = new BackgroundWorker();
                     bwClassifyAllAndExport.DoWork += (o, args)
@@ -289,9 +316,6 @@ namespace MARC2
                     bwClassifyAllAndExport.RunWorkerAsync();
                 }
             }
-
-
-
         }
 
         /// <summary>
@@ -363,7 +387,6 @@ namespace MARC2
             {
                 classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType, ClassificationScheme.Binary, indicatorTermFilePath);
                 allNFRClassification = classifier.predictedLabel;
-
                 //Instead of adding filtered text add the original review.
                 var temp = new List<string>();
                 foreach (var item in classifier.predictedData)
