@@ -630,13 +630,21 @@ namespace MARC2
             userRequirementListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
         }
 
-
+        /// <summary>
+        /// Message Box OK click event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void messageTextBlockOKButton_Click(object sender, RoutedEventArgs e)
         {
             dialogHost.IsOpen = false;
             pageContainer.Visibility = Visibility.Collapsed;
         }
-
+        
+        /// <summary>
+        /// Show Message Dialog using Material Design
+        /// </summary>
+        /// <param name="message"></param>
         private void showMessageDialog(string message)
         {
             messageTextBlock.Text = message;
@@ -644,6 +652,10 @@ namespace MARC2
             dialogHost.IsOpen = true;
         }
 
+        /// <summary>
+        /// Enable disable Spinner
+        /// </summary>
+        /// <param name="enable"></param>
         private void showDialogHostSpinner(bool enable)
         {
             if (enable)

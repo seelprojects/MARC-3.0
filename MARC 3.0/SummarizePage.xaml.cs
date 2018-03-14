@@ -74,7 +74,7 @@ namespace MARC2
             summaryResultsButton_Click(null, null);
 
             //Show Loading Bar
-            progressBarContainer.Visibility = Visibility.Visible;
+            showDialogHostSpinner(true);
 
             //Retrieve the reviews
             var bugReports = Model.BugReportList;
@@ -107,7 +107,7 @@ namespace MARC2
                 summaryResultsButton.IsEnabled = true;
             }
             //Hide Loading Bar
-            progressBarContainer.Visibility = Visibility.Hidden;
+            showDialogHostSpinner(false);
         }
 
         /// <summary>
@@ -448,6 +448,8 @@ namespace MARC2
                 wordCloudButton.IsEnabled = true;
                 summaryResultsButton.IsEnabled = true;
             }
+
+            showDialogHostSpinner(false);
         }
 
         /// <summary>
@@ -823,6 +825,48 @@ namespace MARC2
 
             bugReportSummaryWordCloudGrid.Visibility = Visibility.Collapsed;
             bugReportSummaryGrid.Visibility = Visibility.Visible;
+        }
+
+
+        /// <summary>
+        /// Message Box OK click event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void messageTextBlockOKButton_Click(object sender, RoutedEventArgs e)
+        {
+            dialogHost.IsOpen = false;
+            pageContainer.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Show Message Dialog using Material Design
+        /// </summary>
+        /// <param name="message"></param>
+        private void showMessageDialog(string message)
+        {
+            messageTextBlock.Text = message;
+            pageContainer.Visibility = Visibility.Visible;
+            dialogHost.IsOpen = true;
+        }
+
+        /// <summary>
+        /// Enable disable Spinner
+        /// </summary>
+        /// <param name="enable"></param>
+        private void showDialogHostSpinner(bool enable)
+        {
+            if (enable)
+            {
+                pageContainer.Visibility = Visibility.Visible;
+                dialogHostSpinner.IsOpen = true;
+            }
+            else
+            {
+                pageContainer.Visibility = Visibility.Collapsed;
+                dialogHostSpinner.IsOpen = false;
+            }
+
         }
     }
 }
