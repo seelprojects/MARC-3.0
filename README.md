@@ -5,13 +5,14 @@ MARC 3.0 is the second release of our [Mobile Application Review Classifier MARC
 
 ![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/1.PNG)
 
-# Non-Functional Requirements Classification
-![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/3.PNG)
-
 # Summarization
-![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/3.PNG)
 
 MARC 3.0 provides multiple data summarization algorithms that can be used to generate concise and comprehensive summaries of user reviews. These algorithms include Hybrid TF, Hybrid TFIDF, SumBasic, and LexRank.
+![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/3.PNG)
+
+# Non-Functional Requirements Classification
+MARC 3.0 adds a new functionality to extract Non-Functional Requirements (NFRs) from user reviews. The reviews are classified into 4 major NFR classes, including Dependability, Performance, Supportability and Usability. This classification is done in two steps: 1) The NFR concerns first isolated using binary classification. 2) Dictionary Matching is used to classify user reviews into 4 NFR classes. Users have the freedom to select their own training dataset and dictionary list.
+![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/4.PNG)
 
 # Resources
 1- [Weka: Data Mining Software in Java](http://www.cs.waikato.ac.nz/ml/weka/)
