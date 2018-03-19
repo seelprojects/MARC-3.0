@@ -124,8 +124,8 @@
     <Compile Include="ClassifyNFRPage.xaml.cs">
       <DependentUpon>ClassifyNFRPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converter\CommonConverters.cs" />
     <Compile Include="Converter\ClassifyPageConverters.cs" />
+    <Compile Include="Converter\CommonConverters.cs" />
     <Compile Include="Converter\ImportPageConverters.cs" />
     <Compile Include="EditStopwordsWindow.xaml.cs">
       <DependentUpon>EditStopwordsWindow.xaml</DependentUpon>
