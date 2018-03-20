@@ -1,7 +1,7 @@
 # Mobile Application Review Classifier (MARC) 3.0
 
 
-MARC 3.0 is the second release of our [Mobile Application Review Classifier MARC](https://github.com/seelprojects/MARC). MARC 3.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
+MARC 3.0 is the third release of our [Mobile Application Review Classifier MARC](https://github.com/seelprojects/MARC). MARC 3.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
 
 ![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/1.PNG)
 
