@@ -11,7 +11,8 @@ MARC 3.0 provides multiple data summarization algorithms that can be used to gen
 ![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/3.PNG)
 
 # Non-Functional Requirements Classification
-MARC 3.0 adds a new functionality to extract Non-Functional Requirements (NFRs) from user reviews. The reviews are classified into 4 major NFR classes, including Dependability, Performance, Supportability and Usability. This classification is done in two steps: 1) The NFR concerns first isolated using binary classification. 2) Dictionary Matching is used to classify user reviews into 4 NFR classes. Users have the freedom to select their own training dataset and dictionary list. Please make sure that the custom training file and indicator term list files match the format provided in the source code. The custom files must be added to C:/Users/*name*/AppData/Roaming/MARC 3.0/InputData/TrainingDataset" folder.
+The current release of MARC supports a new functionality to extract Non-Functional Requirements (NFRs) from user reviews. The reviews are classified into four major NFR classes: Dependability, Performance, Supportability, and Usability. The classification is achieved in two steps: 1) Reviews carrying NFR information are first isolated using binary classification, and 2) Dictionary Matching is used to classify user reviews into the four different NFR categories. Users have the option to select their own training dataset and customize the classification dictionary.
+Please make sure that the custom training file and dictionary file match the format provided in the source code. The custom files must be added to the folder: C:/Users/name/AppData/Roaming/MARC 3.0/InputData/TrainingDataset" 
 ![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/4.PNG)
 
 # Resources
