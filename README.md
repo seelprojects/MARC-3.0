@@ -27,7 +27,7 @@ MARC 3.0 adds a new functionality to extract Non-Functional Requirements (NFRs) 
 
 MARC requires .Net 4.5.2 and Java 1.8 to run. MARC can be installed by running the installer from the directory: [MARC Installer -> Debug -> MARC 3.0 Installer.msi](https://github.com/seelprojects/MARC-3.0/tree/master/MARC%203.0%20Installer/Debug)
 
-MARC provides default training datasets (BOF Dataset.arff and BOW Dataset.arff) in the local app data installation directory (C:\Users\{Username}\AppData\Roaming\MARC 3.0\InputData). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
+MARC provides default training datasets in the local app data installation directory (C:\Users\{Username}\AppData\Roaming\MARC 3.0\InputData). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
 
 # Modification
 
