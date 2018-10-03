@@ -37,25 +37,14 @@ namespace MARC2
         public MyViewModel Model { get; set; }
         public bool changeInProgress = false;
 
-        string exceptionMessage;
 
         List<string> allNFRReviews = new List<string>();
         List<string> allNFRClassification = new List<string>();
 
-        //int currentReviewIndex = 0;
-        List<string> filteredReviews;
-        TextFilterType txtfilterType = TextFilterType.NoFilter;
-
+        
         bool CITCheckboxCheckedState;
         bool DITCheckboxCheckedState;
-        bool NoSWCheckboxCheckedState;
-        bool STCheckboxCheckedState;
 
-        bool NBCheckboxCheckedState;
-        bool SVMCheckboxCheckedState;
-
-        bool DTCheckboxCheckedState;
-        bool CTCheckboxCheckedState;
         public List<string> predictedLabel { get; private set; }
 
         List<string> DependabilityWords = new List<string>();
@@ -89,6 +78,7 @@ namespace MARC2
             usabilityHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Usability");
 
             PopulateViewFromModel();
+            
         }
 
 
@@ -349,47 +339,7 @@ namespace MARC2
             PopulateViewFromModel();
         }
 
-        /// <summary>
-        /// OLD Classify all user reviews and export. Takes in a list of user reviews and training File path
-        /// </summary>
-        /// <param name="userReviews"></param>
-        /// <param name="trainingFilePath"></param>
-        private void classifyAllReviews(List<string> userReviews, string trainingFilePath, string indicatorTermFilePath, ClassifierName classifierName)
-        {
-            ResolveTextFilterType();
-            WekaClassifier.WekaClassifier classifier;
-            allNFRClassification = new List<string>();
-
-            filteredReviews = new List<string>();
-            foreach (string review in userReviews)
-            {
-                filteredReviews.Add(FilterText(review));
-            }
-
-            try
-            {
-                classifier = new WekaClassifier.WekaClassifier(filteredReviews, trainingFilePath, Directory.GetCurrentDirectory(), classifierName, txtfilterType, ClassificationScheme.Binary, indicatorTermFilePath);
-                allNFRClassification = classifier.predictedLabel;
-                //Instead of adding filtered text add the original review.
-                var temp = new List<string>();
-                foreach (var item in classifier.predictedData)
-                {
-                    for (int i = 0; i < userReviews.Count; i++)
-                    {
-                        if (FilterText(userReviews[i]) == item)
-                        {
-                            temp.Add(userReviews[i]);
-                            break;
-                        }
-                    }
-                }
-                allNFRReviews = temp;
-            }
-            catch (Exception e)
-            {
-                exceptionMessage = e.ToString();
-            }
-        }
+        
         
 
 
@@ -535,7 +485,7 @@ namespace MARC2
             }
             catch (Exception)
             {
-                exceptionMessage = "Indicator Terms File Read Error";
+                //exceptionMessage = "Indicator Terms File Read Error";
             }
         }
 
@@ -556,72 +506,9 @@ namespace MARC2
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ResolveTextFilterType()
-        {
-            if (NoSWCheckboxCheckedState == false && STCheckboxCheckedState == false)
-            {
-                txtfilterType = TextFilterType.NoFilter;
-            }
-            else if (NoSWCheckboxCheckedState == true && STCheckboxCheckedState == true)
-            {
-                txtfilterType = TextFilterType.StopwordsRemovalStemming;
-            }
-            else if (NoSWCheckboxCheckedState == true)
-            {
-                txtfilterType = TextFilterType.StopwordsRemoval;
-            }
-            else if (STCheckboxCheckedState == true)
-            {
-                txtfilterType = TextFilterType.Stemming;
-            }
-        }
+       
 
-
-        /// <summary>
-        /// Method to filter input text.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private string FilterText(string text)
-        {
-            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
-
-            // Combine the base folder with your specific folder....
-            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
-
-            // Check if folder exists and if not, create it
-            if (!Directory.Exists(specificFolder))
-                Directory.CreateDirectory(specificFolder);
-
-
-            text.Replace('.', ' ');
-            if (NoSWCheckboxCheckedState)
-            {
-                StopWordRemoval.StopWordRemoval temp = new StopWordRemoval.StopWordRemoval(text, specificFolder);
-                text = temp.output;
-            }
-
-
-            if (STCheckboxCheckedState)
-            {
-                string[] words = text.Split(' ');
-                string finalStemOutput = "";
-                foreach (string word in words)
-                {
-                    Stemmer temp = new Stemmer();
-                    temp.add(word.ToCharArray(), word.Length);
-                    temp.stem();
-                    var stemOutput = temp.ToString();
-                    finalStemOutput += stemOutput + " ";
-                }
-                text = finalStemOutput;
-            }
-            text = RemoveSpecialCharacters(text);
-            return text;
-        }
+        
 
 
         /// <summary>

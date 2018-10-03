@@ -47,8 +47,6 @@ namespace MARC2
             Model = model;
             this.DataContext = this;
             ReadLocalAppDataFile();
-            
-            
         }
 
 
@@ -67,6 +65,11 @@ namespace MARC2
             // Check if folder exists and if not, create it
             if (!Directory.Exists(specificFolder))
                 Directory.CreateDirectory(specificFolder);
+
+
+            // Check if file exists and if not, create it
+            //if(!File.Exists(specificFolder + @"/MyAppsList.txt"))
+            //    using (File.Create(specificFolder + @"/MyAppsList.txt"))
 
             //var currDir = System.IO.Directory.GetCurrentDirectory();
             using (var localAppDataFileStreamReader = new StreamReader(specificFolder + @"/MyAppsList.txt"))
