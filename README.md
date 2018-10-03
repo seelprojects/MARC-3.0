@@ -1,7 +1,7 @@
 # Mobile Application Review Classifier (MARC) 3.0
 
 
-MARC 3.0 is the second release of our [Mobile Application Review Classifier MARC](https://github.com/seelprojects/MARC). MARC 3.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
+MARC 3.0 is the third release of our [Mobile Application Review Classifier MARC](https://github.com/seelprojects/MARC). MARC 3.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
 
 ![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/1.PNG)
 
@@ -11,7 +11,8 @@ MARC 3.0 provides multiple data summarization algorithms that can be used to gen
 ![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/3.PNG)
 
 # Non-Functional Requirements Classification
-MARC 3.0 adds a new functionality to extract Non-Functional Requirements (NFRs) from user reviews. The reviews are classified into 4 major NFR classes, including Dependability, Performance, Supportability and Usability. This classification is done in two steps: 1) The NFR concerns first isolated using binary classification. 2) Dictionary Matching is used to classify user reviews into 4 NFR classes. Users have the freedom to select their own training dataset and dictionary list. Please make sure that the custom training file and indicator term list files match the format provided in the source code. The custom files must be added to C:/Users/*name*/AppData/Roaming/MARC 3.0/InputData/TrainingDataset" folder.
+The current release of MARC supports a new functionality to extract Non-Functional Requirements (NFRs) from user reviews. The reviews are classified into four major NFR classes: Dependability, Performance, Supportability, and Usability. The classification is achieved in two steps: 1) Reviews carrying NFR information are first isolated using binary classification, and 2) Dictionary Matching is used to classify user reviews into the four different NFR categories. Users have the option to select their own training dataset and customize the classification dictionary.
+Please make sure that the custom training file and dictionary file match the format provided in the source code. The custom files must be added to the folder: C:/Users/name/AppData/Roaming/MARC 3.0/InputData/TrainingDataset" 
 ![ScreenShot](https://raw.githubusercontent.com/seelprojects/MARC-3.0/master/MARC%203.0/Images/4.PNG)
 
 # Resources
@@ -27,7 +28,7 @@ MARC 3.0 adds a new functionality to extract Non-Functional Requirements (NFRs) 
 
 MARC requires .Net 4.5.2 and Java 1.8 to run. MARC can be installed by running the installer from the directory: [MARC Installer -> Debug -> MARC 3.0 Installer.msi](https://github.com/seelprojects/MARC-3.0/tree/master/MARC%203.0%20Installer/Debug)
 
-MARC provides default training datasets (BOF Dataset.arff and BOW Dataset.arff) in the local app data installation directory (C:\Users\{Username}\AppData\Roaming\MARC 3.0\InputData). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
+MARC provides default training datasets in the local app data installation directory (C:/Users/*name*/AppData/Roaming/MARC 3.0/InputData/TrainingDataset). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
 
 # Modification
 
