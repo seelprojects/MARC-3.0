@@ -62,6 +62,7 @@ namespace WekaClassifier
         /// <param name="singleReviewBOW"></param>
         public WekaClassifier(List<string> inputBoWList, string trainingFilePath, string directoryName, ClassifierName classifierName, TextFilterType textFilterType, ClassificationScheme classificationScheme = ClassificationScheme.MultiClass, string dictionaryListFilePath = null)
         {
+            //Binary Classification is never called under new code 
             if (classificationScheme == ClassificationScheme.Binary)
             {
                 //Step 1: Contruct Arff File

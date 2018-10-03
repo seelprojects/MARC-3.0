@@ -51,10 +51,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>FA4C4411F1BB86910BF9A5E7DF126A1EFECC3B47</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>562F4AE7D3EA90616FD2FEA0430AE9B56F83B17C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>MARC 2.0_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>MARC 3.0_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -215,6 +215,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="MARC 2.0_TemporaryKey.pfx" />
+    <None Include="MARC 3.0_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

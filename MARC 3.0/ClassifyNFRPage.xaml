@@ -66,96 +66,7 @@
 
         <!--Left Content-->
         <StackPanel Margin="5,0,0,5" Grid.Column="0" >
-            <materialDesign:Card  Margin="5,5,0,0">
-                <GroupBox Header="Classification Settings" Style="{DynamicResource MaterialDesignCardGroupBox}">
-                    <StackPanel>
-                        <!--Classifier-->
-                        <TextBlock TextDecorations="Underline" Style="{DynamicResource MaterialDesignBody2TextBlock}" Name="MyAppsMessageTextBlock" Margin="0,10,0,10" Text="Select Binary Classifier"  HorizontalAlignment="Left"  Visibility="Visible" />
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"></RowDefinition>
-                                <RowDefinition Height="1*"></RowDefinition>
-                                <RowDefinition Height="1*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="4*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!--> Naive Bayes <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Naive Bayes</TextBlock>-->
-                            <CheckBox Name="NBCheckbox" Grid.ColumnSpan="2" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Left" Checked="ClassifierCheckbox_Checked" Unchecked="ClassifierCheckbox_Checked" Content="Naive Bayes"></CheckBox>
-
-                            <!--> Support Vector Machine <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Support Vector Machine</TextBlock>-->
-                            <CheckBox Name="SVMCheckbox" Grid.ColumnSpan="2" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Checked="ClassifierCheckbox_Checked" Unchecked="ClassifierCheckbox_Checked" Content="Support Vector Machines"></CheckBox>
-                        </Grid>
-
-                        <!--Training-->
-                        <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Margin="0,10,0,10" Text="Select Training File"  HorizontalAlignment="Left" TextDecorations="Underline" Visibility="Visible" />
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"></RowDefinition>
-                                <RowDefinition Height="1*"></RowDefinition>
-                                <RowDefinition Height="1*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <!--> Default Training <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Left">Default Training</TextBlock>-->
-                            <CheckBox  Name="DTCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Grid.ColumnSpan="5" Content="Default Training" Checked="TrainingCheckbox_Checked" Unchecked="TrainingCheckbox_Checked"></CheckBox>
-
-                            <!--> Custom Training <!-->
-                            <!--<TextBlock  Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Left">Custom Training</TextBlock>-->
-                            <CheckBox Name="CTCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Grid.ColumnSpan="5" Content="Custom Training" Checked="TrainingCheckbox_Checked" Unchecked="TrainingCheckbox_Checked"></CheckBox>
-
-                            <StackPanel  Grid.Row="2" Grid.ColumnSpan="5" Grid.Column="0">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1.5*" />
-                                        <ColumnDefinition Width="5*" />
-                                        <ColumnDefinition Width="3*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="1" Name="browseCustomTrainingFileTextbox" BorderThickness="1" Height="25" />
-                                    <Button Grid.Column="2" Foreground="White" FontSize="11" Height="25" Name="browseCustomTrainingFileButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  HorizontalAlignment="Right" VerticalAlignment="Center" Content="Browse" Click="browseCustomTrainingFileButton_Click" ></Button>
-                                </Grid>
-                            </StackPanel>
-                        </Grid>
-
-                        <!--Filter-->
-                        <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Margin="0,10,0,10" Text="Select Filter"  HorizontalAlignment="Left" TextDecorations="Underline" Visibility="Visible" />
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"></RowDefinition>
-                                <RowDefinition Height="1*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="4*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!--> No Stopwords <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Stopwords Removal</TextBlock>-->
-                            <CheckBox Name="NoSWCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Stopwords Removal"  HorizontalAlignment="Left" Checked="FilterCheckbox_Checked"></CheckBox>
-
-                            <!--> Stemming <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Stemming</TextBlock>-->
-                            <CheckBox Name="STCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Stemming" HorizontalAlignment="Left" Checked="FilterCheckbox_Checked"></CheckBox>
-
-
-                        </Grid>
-
-
-                        <!--Moved Classification button from here to below that material design card-->
-                    </StackPanel>
-                </GroupBox>
-            </materialDesign:Card>
-
+            
             <materialDesign:Card  Margin="5,5,0,0">
                 <GroupBox Header="Indicator Terms Settings" Style="{DynamicResource MaterialDesignCardGroupBox}">
                     <StackPanel>
@@ -197,7 +108,7 @@
 
 
 
-            <Button Margin="10,10,0,0" Name="classifyButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="classifyButton_Click" >
+            <Button Margin="10,10,0,0" Name="classifyButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="classifyButtonNew_Click" >
                 <StackPanel Height="48" Orientation="Horizontal">
                     <Image Source="Icons/classify-icon.png" Height="36" Width="36"/>
                     <Label Foreground="White" FontSize="12" Margin="0,15,0,0" Content="         Classify                   " HorizontalAlignment="Center"/>

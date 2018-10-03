@@ -25,6 +25,7 @@ using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Diagnostics;
 using WpfApplicationTest.Enums;
+using System.Text.RegularExpressions;
 
 namespace MARC2
 {
@@ -55,6 +56,17 @@ namespace MARC2
 
         bool DTCheckboxCheckedState;
         bool CTCheckboxCheckedState;
+        public List<string> predictedLabel { get; private set; }
+
+        List<string> DependabilityWords = new List<string>();
+        List<string> PerformanceWords = new List<string>();
+        List<string> SupportabilityWords = new List<string>();
+        List<string> UsabilityWords = new List<string>();
+
+        List<string> DependabilityWordsExtra = new List<string>();
+        List<string> PerformanceWordsExtra = new List<string>();
+        List<string> SupportabilityWordsExtra = new List<string>();
+        List<string> UsabilityWordsExtra = new List<string>();
 
         /// <summary>
         /// Classify Page accepts model with MyViewModel type 
@@ -69,8 +81,6 @@ namespace MARC2
             this.DataContext = this;
 
             //Initialize Checkbox checked state
-            NBCheckbox.IsChecked = true;
-            DTCheckbox.IsChecked = true;
             DITCheckbox.IsChecked = true;
 
             dependabilityHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Dependability");
@@ -209,14 +219,7 @@ namespace MARC2
         /// <param name="e"></param>
         private void TrainingCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!changeInProgress)
-            {
-                changeInProgress = true;
-                CTCheckbox.IsChecked = false;
-                DTCheckbox.IsChecked = false;
-                (sender as CheckBox).IsChecked = true;
-                changeInProgress = false;
-            }
+            //No need to make sure only one filter is selected.
         }
 
         /// <summary>
@@ -226,23 +229,17 @@ namespace MARC2
         /// <param name="e"></param>
         private void ClassifierCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            if (!changeInProgress)
-            {
-                changeInProgress = true;
-                NBCheckbox.IsChecked = false;
-                SVMCheckbox.IsChecked = false;
-
-                (sender as CheckBox).IsChecked = true;
-                changeInProgress = false;
-            }
+            //No need to make sure only one filter is selected.
         }
 
+        
+
         /// <summary>
-        /// Classify Reviews Button Click Event Handler
+        /// NEW Classify Reviews Button Click Event Handler
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void classifyButton_Click(object sender, RoutedEventArgs e)
+        private void classifyButtonNew_Click(object sender, RoutedEventArgs e)
         {
             showDialogHostSpinner(true);
 
@@ -250,29 +247,12 @@ namespace MARC2
             var userReviews = Model.ReviewList;
             CITCheckboxCheckedState = CITCheckbox.IsChecked ?? false;
             DITCheckboxCheckedState = DITCheckbox.IsChecked ?? false;
-            NoSWCheckboxCheckedState = NoSWCheckbox.IsChecked ?? false;
-            STCheckboxCheckedState = STCheckbox.IsChecked ?? false;
-
-            NBCheckboxCheckedState = NBCheckbox.IsChecked ?? false;
-            SVMCheckboxCheckedState = SVMCheckbox.IsChecked ?? false;
-
-            DTCheckboxCheckedState = DTCheckbox.IsChecked ?? false;
-            CTCheckboxCheckedState = CTCheckbox.IsChecked ?? false;
-
+            
             bool validCITFilePath = true;
-            bool validCTFilePath = true;
-            var CTFilePath = browseCustomTrainingFileTextbox.Text;
             var CITFilePath = browseCITFileTextbox.Text;
 
-            //Check For Custom training file option checked and file not selected
-            if (CTCheckboxCheckedState && browseCustomTrainingFileTextbox.Text == "")
-            {
-                showDialogHostSpinner(false);
-                showMessageDialog("Custom training file field empty.");
-                validCTFilePath = false;
-
-            }
-            else if (CITCheckboxCheckedState && browseCITFileTextbox.Text == "")
+            //Check For Custom Indicator Term file option checked and file not selected
+            if (CITCheckboxCheckedState && browseCITFileTextbox.Text == "")
             {
                 showDialogHostSpinner(false);
                 showMessageDialog("Custom indicator terms folder field empty.");
@@ -304,25 +284,22 @@ namespace MARC2
                 showDialogHostSpinner(false);
                 showMessageDialog("Indicator terms folder path invalid or does not contain the required files.");
             }
-            else if (userReviews.Count != 0 && validCITFilePath && validCTFilePath)
+            else if (userReviews.Count != 0 && validCITFilePath)
             {
                 var bwClassifyAllAndExport = new BackgroundWorker();
                 bwClassifyAllAndExport.DoWork += (o, args)
                     => classifyAllReviews
-                    (
-                        userReviews,
-                        CTCheckboxCheckedState ? CTFilePath : null,
-                        CITCheckboxCheckedState ? CITFilePath : null,
-                        SVMCheckboxCheckedState ? ClassifierName.SupportVectorMachine : ClassifierName.NaiveBayes
+                        (
+                            userReviews,
+                            CITCheckboxCheckedState ? CITFilePath : null
                         );
                 bwClassifyAllAndExport.RunWorkerCompleted += (o, args) => classifyAllAndExportUpdateControl();
                 bwClassifyAllAndExport.RunWorkerAsync();
             }
-            validCTFilePath = true;
             validCITFilePath = true;
-
-            
         }
+
+
 
         /// <summary>
         /// Classify all and Export Update Control
@@ -330,8 +307,6 @@ namespace MARC2
         /// <param name="trainingFilePath"></param>
         private void classifyAllAndExportUpdateControl()
         {
-
-
             List<string> dependabilityReviews = new List<string>();
             List<string> performanceReviews = new List<string>();
             List<string> supportabilityReviews = new List<string>();
@@ -375,7 +350,7 @@ namespace MARC2
         }
 
         /// <summary>
-        /// Classify all user reviews and export. Takes in a list of user reviews and training File path
+        /// OLD Classify all user reviews and export. Takes in a list of user reviews and training File path
         /// </summary>
         /// <param name="userReviews"></param>
         /// <param name="trainingFilePath"></param>
@@ -415,6 +390,171 @@ namespace MARC2
                 exceptionMessage = e.ToString();
             }
         }
+        
+
+
+        /// <summary>
+        /// NEW Classify all user reviews and export. Takes in a list of user reviews and training File path
+        /// </summary>
+        /// <param name="userReviews"></param>
+        /// <param name="trainingFilePath"></param>
+        private void classifyAllReviews(List<string> userReviews, string indicatorTermFilePath)
+        {
+            //Step 1: Read Dictionary List
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 3.0");
+
+            specificFolder = System.IO.Path.Combine(specificFolder, @"InputData\TrainingDatasets");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+
+            if (indicatorTermFilePath != null)
+            {
+                specificFolder = indicatorTermFilePath;
+            }
+            try
+            {
+                DependabilityWords.Clear();
+                PerformanceWords.Clear();
+                SupportabilityWords.Clear();
+                UsabilityWords.Clear();
+
+                #region Read NFR words
+                using (var sR = new StreamReader(specificFolder + @"\Dependability Words.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        DependabilityWords.Add(line);
+                    }
+                    sR.Close();
+                }
+
+                using (var sR = new StreamReader(specificFolder + @"\Dependability Words Extra.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        DependabilityWordsExtra.Add(line);
+                    }
+                    sR.Close();
+                }
+
+                using (var sR = new StreamReader(specificFolder + @"\Performance Words.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        PerformanceWords.Add(line);
+                    }
+                    sR.Close();
+                }
+                using (var sR = new StreamReader(specificFolder + @"\Performance Words Extra.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        PerformanceWordsExtra.Add(line);
+                    }
+                    sR.Close();
+                }
+
+                using (var sR = new StreamReader(specificFolder + @"\Supportability Words.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        SupportabilityWords.Add(line);
+                    }
+                    sR.Close();
+                }
+                using (var sR = new StreamReader(specificFolder + @"\Supportability Words Extra.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        SupportabilityWordsExtra.Add(line);
+                    }
+                    sR.Close();
+                }
+
+                using (var sR = new StreamReader(specificFolder + @"\Usability Words.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        UsabilityWords.Add(line);
+                    }
+                    sR.Close();
+                }
+                using (var sR = new StreamReader(specificFolder + @"\Usability Words Extra.txt"))
+                {
+                    var line = "";
+                    while ((line = sR.ReadLine()) != null)
+                    {
+                        UsabilityWordsExtra.Add(line);
+                    }
+                    sR.Close();
+                }
+
+                #endregion Read NFR words
+
+                predictedLabel = new List<string>(new string[userReviews.Count]);
+
+                for (int i = 0; i < userReviews.Count; i++)
+                {
+
+                    int depScore = DependabilityWords.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    int perScore = PerformanceWords.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    int supScore = SupportabilityWords.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    int usaScore = UsabilityWords.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+
+                    depScore += DependabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    perScore += PerformanceWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    supScore += SupportabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    usaScore += UsabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+
+                    int matchThreshold = (WordCount(userReviews[i]) < 12) ? 0 : 1;
+
+                    if (depScore > matchThreshold) { predictedLabel[i] = "Dep"; }
+                    if (perScore > matchThreshold) { predictedLabel[i] = predictedLabel[i] == null ? "Per" : predictedLabel[i] + ",Per"; }
+                    if (supScore > matchThreshold) { predictedLabel[i] = predictedLabel[i] == null ? "Sup" : predictedLabel[i] + ",Sup"; }
+                    if (usaScore > matchThreshold) { predictedLabel[i] = predictedLabel[i] == null ? "Usa" : predictedLabel[i] + ",Usa"; }
+
+                    if (predictedLabel[i] == null) { predictedLabel[i] = "Mis"; }
+                }
+
+                allNFRClassification = predictedLabel;
+                allNFRReviews = userReviews;
+
+            }
+            catch (Exception)
+            {
+                exceptionMessage = "Indicator Terms File Read Error";
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="txtToCount"></param>
+        /// <returns></returns>
+        public int WordCount(string txtToCount)
+        {
+            string pattern = "\\w+";
+            Regex regex = new Regex(pattern);
+
+            int CountedWords = regex.Matches(txtToCount).Count;
+
+            return CountedWords;
+        }
+
 
         /// <summary>
         /// 
@@ -502,27 +642,7 @@ namespace MARC2
             }
             return sb.ToString();
         }
-
-
-        /// <summary>
-        /// Browse Custom Training File Button Click Handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void browseCustomTrainingFileButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog fdlg = new OpenFileDialog();
-
-
-            //fdlg.InitialDirectory = System.IO.Directory.GetCurrentDirectory() + "\\InputData\\TrainingDatasets";
-            fdlg.Filter = "Arff Files (*.arff)|*.arff";
-            fdlg.FilterIndex = 2;
-            fdlg.RestoreDirectory = true;
-            if (fdlg.ShowDialog() == true)
-            {
-                browseCustomTrainingFileTextbox.Text = fdlg.FileName;
-            }
-        }
+        
 
         /// <summary>
         /// Show Select Output Folder Dialog
