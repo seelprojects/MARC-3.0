@@ -252,14 +252,14 @@ namespace MARC2
             {
                 if
                    (
-                       File.Exists(CITFilePath + @"\\Dependability Words.txt") &&
-                       File.Exists(CITFilePath + @"\\Performance Words.txt") &&
-                       File.Exists(CITFilePath + @"\\Supportability Words.txt") &&
-                       File.Exists(CITFilePath + @"\\Usability Words.txt") &&
-                       File.Exists(CITFilePath + @"\\Dependability Words Extra.txt") &&
-                       File.Exists(CITFilePath + @"\\Performance Words Extra.txt") &&
-                       File.Exists(CITFilePath + @"\\Supportability Words Extra.txt") &&
-                       File.Exists(CITFilePath + @"\\Usability Words Extra.txt"))
+                       File.Exists(CITFilePath + @"\\DependabilityDictionary.txt") &&
+                       File.Exists(CITFilePath + @"\\PerformanceDictionary.txt") &&
+                       File.Exists(CITFilePath + @"\\SupportabilityDictionary.txt") &&
+                       File.Exists(CITFilePath + @"\\UsabilityDictionary.txt") &&
+                       File.Exists(CITFilePath + @"\\DependabilitySuperDictionary.txt") &&
+                       File.Exists(CITFilePath + @"\\PerformanceSuperDictionary.txt") &&
+                       File.Exists(CITFilePath + @"\\SupportabilitySuperDictionary.txt") &&
+                       File.Exists(CITFilePath + @"\\UsabilitySuperDictionary.txt"))
                 {
                     validCITFilePath = true;
                 }
@@ -370,12 +370,16 @@ namespace MARC2
             try
             {
                 DependabilityWords.Clear();
+                DependabilityWordsExtra.Clear();
                 PerformanceWords.Clear();
+                PerformanceWordsExtra.Clear();
                 SupportabilityWords.Clear();
+                SupportabilityWordsExtra.Clear();
                 UsabilityWords.Clear();
+                UsabilityWordsExtra.Clear();
 
                 #region Read NFR words
-                using (var sR = new StreamReader(specificFolder + @"\Dependability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\DependabilityDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -385,7 +389,7 @@ namespace MARC2
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\Dependability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\DependabilitySuperDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -395,7 +399,7 @@ namespace MARC2
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\Performance Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\PerformanceDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -404,7 +408,7 @@ namespace MARC2
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\Performance Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\PerformanceSuperDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -414,7 +418,7 @@ namespace MARC2
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\Supportability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\SupportabilityDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -423,7 +427,7 @@ namespace MARC2
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\Supportability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\SupportabilitySuperDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -433,7 +437,7 @@ namespace MARC2
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\Usability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\UsabilityDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -442,7 +446,7 @@ namespace MARC2
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\Usability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\UsabilitySuperDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -464,10 +468,10 @@ namespace MARC2
                     int supScore = SupportabilityWords.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
                     int usaScore = UsabilityWords.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
 
-                    depScore += DependabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
-                    perScore += PerformanceWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
-                    supScore += SupportabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
-                    usaScore += UsabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    depScore += 2* DependabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    perScore += 2* PerformanceWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    supScore += 2* SupportabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
+                    usaScore += 2* UsabilityWordsExtra.Count(s => userReviews[i].ToLower().Contains(s.ToLower()));
 
                     int matchThreshold = (WordCount(userReviews[i]) < 12) ? 0 : 1;
 
@@ -486,6 +490,7 @@ namespace MARC2
             catch (Exception)
             {
                 //exceptionMessage = "Indicator Terms File Read Error";
+                MessageBox.Show("Problem reading training file.");
             }
         }
 

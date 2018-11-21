@@ -741,6 +741,8 @@ namespace MARC2
                 IEnumerable<string> terms = ComponentFactory.CreateExtractor(inputType, String.Join(",", preProcessedList.ToArray()), progress);
                 IWordStemmer stemmer = ComponentFactory.CreateWordStemmer(false);
 
+                //var x = terms.Except(blacklist);
+
                 IEnumerable<IWord> words = terms
                     .Filter(blacklist)
                     .CountOccurences();

@@ -139,7 +139,7 @@ namespace WekaClassifier
                 UsabilityWords.Clear();
 
                 #region Read NFR words
-                using (var sR = new StreamReader(specificFolder + @"\Dependability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\DependabilityDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -149,7 +149,7 @@ namespace WekaClassifier
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\Dependability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\DependabilitySuperDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -159,7 +159,7 @@ namespace WekaClassifier
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\Performance Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\PerformanceDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -168,7 +168,7 @@ namespace WekaClassifier
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\Performance Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\PerformanceSuperDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -178,7 +178,7 @@ namespace WekaClassifier
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\Supportability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\SupportabilityDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -187,7 +187,7 @@ namespace WekaClassifier
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\Supportability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\SupportabilitySuperDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -197,7 +197,7 @@ namespace WekaClassifier
                     sR.Close();
                 }
 
-                using (var sR = new StreamReader(specificFolder + @"\Usability Words.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\UsabilityDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
@@ -206,7 +206,7 @@ namespace WekaClassifier
                     }
                     sR.Close();
                 }
-                using (var sR = new StreamReader(specificFolder + @"\Usability Words Extra.txt"))
+                using (var sR = new StreamReader(specificFolder + @"\UsabilitySuperDictionary.txt"))
                 {
                     var line = "";
                     while ((line = sR.ReadLine()) != null)
