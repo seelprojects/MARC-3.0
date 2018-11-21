@@ -70,7 +70,7 @@ namespace MARC2
             NBCheckbox.IsChecked = true;
             DTCheckbox.IsChecked = true;
             BOWCheckbox.IsChecked = true;
-            
+
             bugReportsHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Bug Reports");
             userRequirementsHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "User Requirements");
 
@@ -137,7 +137,7 @@ namespace MARC2
 
                 showDialogHostSpinner(false);
             }
-            catch (Exception )
+            catch (Exception)
             {
             }
         }
@@ -340,7 +340,7 @@ namespace MARC2
                 }
                 else
                 {
-                    showMessageDialog("Looks like the server is down.");
+                    showMessageDialog("Looks like the framenet server is down. Please try again later.");
                 }
             }
             else if (BOWCheckboxCheckedState)
@@ -484,7 +484,7 @@ namespace MARC2
             if (Model.BugReportList == null || Model.BugReportList.Count == 0)
             {
                 showMessageDialog("One or more list may be empty.");
-                
+
             }
             else if (Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
             {
@@ -640,16 +640,20 @@ namespace MARC2
             dialogHost.IsOpen = false;
             pageContainer.Visibility = Visibility.Collapsed;
         }
-        
+
         /// <summary>
         /// Show Message Dialog using Material Design
         /// </summary>
         /// <param name="message"></param>
         private void showMessageDialog(string message)
         {
-            messageTextBlock.Text = message;
-            pageContainer.Visibility = Visibility.Visible;
-            dialogHost.IsOpen = true;
+            this.Dispatcher.Invoke(() =>
+            {
+                messageTextBlock.Text = message;
+                pageContainer.Visibility = Visibility.Visible;
+                dialogHost.IsOpen = true;
+            });
+
         }
 
         /// <summary>
