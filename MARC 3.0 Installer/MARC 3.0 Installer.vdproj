@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_031CDDD9847D4182B814CED29E0AF26E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_050250E1717F4F0AB2917FF5D522FDC6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -117,7 +123,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2123E6EF5B9649B487D9F62C4360FFFB"
+        "MsmKey" = "8:_22C2BD02781D4ABA83CDA7E69D7A165E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -213,19 +219,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_35C700C974724DAAB243BB20C0087D3F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_396A442B72DA4BA58506A8543841099E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3B1B5288F9114A6DBB0067E0BCF49844"
+        "MsmKey" = "8:_3B2B01F452334AFF8EA91BB38EDBF11B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -351,6 +351,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5F9FFE46803C4AF4AC6FA8650BB652FE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6313B0E437644F32B3E30333E09CE7CC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -471,12 +477,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_713D7E9D1B0D48AF833DE144E4DBB331"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_76148D12C876435AB0CB14054833590D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -484,6 +484,18 @@
         "Entry"
         {
         "MsmKey" = "8:_810840AE756E45A686CE3BB5636DFF1D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_81FC6A1DE1E54CE7A95E572534717C95"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_851D7F622E9E4CCAA6B13278ECBA8AF8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -567,6 +579,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A512EDCD69FD4565973543FF485B5F01"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A561D06E0C31B31CE21002FBD4093CC6"
         "OwnerKey" = "8:_00A80F66FB5CB676027F4EAA18CE3F51"
         "MsmSig" = "8:_UNDEFINED"
@@ -633,12 +651,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AFDB5A7D688A4C72ABFC2D1EDEF9B9EA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B4EE8C292BBC6B016706032EAC7F7E89"
         "OwnerKey" = "8:_6A3DB4C951704010418C8B2E03EA5932"
         "MsmSig" = "8:_UNDEFINED"
@@ -689,6 +701,12 @@
         {
         "MsmKey" = "8:_B4EE8C292BBC6B016706032EAC7F7E89"
         "OwnerKey" = "8:_68D646C5C5603696E02DA7FB81076332"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B88C532D69E746D8A1ABD365E6053BB9"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -753,20 +771,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CD48F1DAF3AF479D8FEA65477A104F06"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D8DD9D99CC47B69468C1C8AD939505CA"
         "OwnerKey" = "8:_FA0C1FD9E8F64780839729386B2852C6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DA12CCFECF8C447190EA28BA76EE2E8E"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -797,12 +803,6 @@
         {
         "MsmKey" = "8:_DF67215F662894BD5BC818A7771BE190"
         "OwnerKey" = "8:_A561D06E0C31B31CE21002FBD4093CC6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E0975CF4B4DC4E27A6619FBF613A8C42"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1174,6 +1174,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -1233,6 +1241,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_031CDDD9847D4182B814CED29E0AF26E"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\UsabilitySuperDictionary.txt"
+            "TargetName" = "8:UsabilitySuperDictionary.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_050250E1717F4F0AB2917FF5D522FDC6"
@@ -1470,10 +1498,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2123E6EF5B9649B487D9F62C4360FFFB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_22C2BD02781D4ABA83CDA7E69D7A165E"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\Supportability Words.txt"
-            "TargetName" = "8:Supportability Words.txt"
+            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\PerformanceDictionary.txt"
+            "TargetName" = "8:PerformanceDictionary.txt"
             "Tag" = "8:"
             "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
             "Condition" = "8:"
@@ -1614,26 +1642,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_35C700C974724DAAB243BB20C0087D3F"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\Usability Words.txt"
-            "TargetName" = "8:Usability Words.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_396A442B72DA4BA58506A8543841099E"
             {
             "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\BOF Test.arff"
@@ -1654,10 +1662,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3B1B5288F9114A6DBB0067E0BCF49844"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3B2B01F452334AFF8EA91BB38EDBF11B"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\Usability Words Extra.txt"
-            "TargetName" = "8:Usability Words Extra.txt"
+            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\DependabilitySuperDictionary.txt"
+            "TargetName" = "8:DependabilitySuperDictionary.txt"
             "Tag" = "8:"
             "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
             "Condition" = "8:"
@@ -1900,6 +1908,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5F9FFE46803C4AF4AC6FA8650BB652FE"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\PerformanceSuperDictionary.txt"
+            "TargetName" = "8:PerformanceSuperDictionary.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6313B0E437644F32B3E30333E09CE7CC"
             {
             "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\BOW Dataset.arff"
@@ -2013,26 +2041,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_713D7E9D1B0D48AF833DE144E4DBB331"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\Dependability Words Extra.txt"
-            "TargetName" = "8:Dependability Words Extra.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_76148D12C876435AB0CB14054833590D"
             {
             "SourcePath" = "8:..\\..\\MARC-2.0\\MARC 2.0\\Images\\bug_n.png"
@@ -2059,6 +2067,46 @@
             "TargetName" = "8:MyAppsList.txt"
             "Tag" = "8:"
             "Folder" = "8:_00876B1E71B940A2AD6F88EB182D6867"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_81FC6A1DE1E54CE7A95E572534717C95"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\DependabilityDictionary.txt"
+            "TargetName" = "8:DependabilityDictionary.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_851D7F622E9E4CCAA6B13278ECBA8AF8"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\UsabilityDictionary.txt"
+            "TargetName" = "8:UsabilityDictionary.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2330,6 +2378,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A512EDCD69FD4565973543FF485B5F01"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\SupportabilityDictionary.txt"
+            "TargetName" = "8:SupportabilityDictionary.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A561D06E0C31B31CE21002FBD4093CC6"
             {
             "AssemblyRegister" = "3:1"
@@ -2392,26 +2460,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AFDB5A7D688A4C72ABFC2D1EDEF9B9EA"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\Performance Words Extra.txt"
-            "TargetName" = "8:Performance Words Extra.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B4EE8C292BBC6B016706032EAC7F7E89"
             {
             "AssemblyRegister" = "3:1"
@@ -2441,6 +2489,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B88C532D69E746D8A1ABD365E6053BB9"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\SupportabilitySuperDictionary.txt"
+            "TargetName" = "8:SupportabilitySuperDictionary.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BBAEA547F3DB0015898E7A562C927701"
@@ -2596,26 +2664,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD48F1DAF3AF479D8FEA65477A104F06"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\Performance Words.txt"
-            "TargetName" = "8:Performance Words.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D8DD9D99CC47B69468C1C8AD939505CA"
             {
             "AssemblyRegister" = "3:1"
@@ -2647,26 +2695,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DA12CCFECF8C447190EA28BA76EE2E8E"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\Supportability Words Extra.txt"
-            "TargetName" = "8:Supportability Words Extra.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DF67215F662894BD5BC818A7771BE190"
             {
             "AssemblyRegister" = "3:1"
@@ -2696,26 +2724,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0975CF4B4DC4E27A6619FBF613A8C42"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\AppData\\Roaming\\MARC 3.0\\InputData\\TrainingDatasets\\Dependability Words.txt"
-            "TargetName" = "8:Dependability Words.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_D75C0C5CC29147188167792D1B3C0427"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E616D62C4ABBDA5DBCE64235075CDFA8"
@@ -3047,7 +3055,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MARC 3.0"
         "ProductCode" = "8:{D773577D-7E79-4500-B6C1-D0620CE704C6}"
-        "PackageCode" = "8:{D0B60BA3-78CB-4978-B172-A8BE90ACA086}"
+        "PackageCode" = "8:{BF1C51AC-E171-4A47-8D5C-A2FF72BBCFD3}"
         "UpgradeCode" = "8:{42E76614-3772-400F-857E-A0DC857C91BD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
